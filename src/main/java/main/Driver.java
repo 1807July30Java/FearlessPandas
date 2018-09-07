@@ -1,7 +1,7 @@
 package main;
 
 import com.revature.beans.Address;
-import com.revature.beans.User;
+import com.revature.beans.AppUser;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -23,8 +23,8 @@ public class Driver {
         Transaction tx = s.beginTransaction();
 
         try {
-            int id = (int) s.save(new User("Timmy", "isCool"));
-            User temp = (User) s.get(User.class, id);
+            int id = (int) s.save(new AppUser("Timmy", "isCool"));
+            AppUser temp = (AppUser) s.get(AppUser.class, id);
             Set<Address> tempAddress = new HashSet();
             tempAddress.add(new Address("123 Street", "4E", "Queens", "NY", 11404));
             temp.setAddresses(tempAddress);

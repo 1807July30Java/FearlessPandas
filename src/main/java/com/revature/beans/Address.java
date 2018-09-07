@@ -25,12 +25,12 @@ public class Address {
     @Column(name = "ZIP")
     private int zip;
     @ManyToMany(mappedBy = "addresses")
-    private Set<User> users = new HashSet<>();
+    private Set<AppUser> users = new HashSet<>();
 
     public Address() {
     }
 
-    public Address(String street, String apartment, String city, String state, int zip, Set<User> users) {
+    public Address(String street, String apartment, String city, String state, int zip, Set<AppUser> users) {
         this.street = street;
         this.apartment = apartment;
         this.city = city;
@@ -87,11 +87,11 @@ public class Address {
         this.zip = zip;
     }
 
-    public Set<User> getUsers() {
+    public Set<AppUser> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<User> users) {
+    public void setUsers(Set<AppUser> users) {
         this.users = users;
     }
 

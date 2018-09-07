@@ -22,8 +22,6 @@ public class Address {
     private String state;
     @Column(name = "ZIP")
     private int zip;
-    @ManyToMany(mappedBy = "addresses")
-    private Set<User> users = new HashSet<>();
 
     public Address() {
     }
@@ -34,7 +32,6 @@ public class Address {
         this.city = city;
         this.state = state;
         this.zip = zip;
-        this.users = users;
     }
 
     public Address(String street, String apartment, String city, String state, int zip) {
@@ -85,14 +82,6 @@ public class Address {
         this.zip = zip;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
     public String getApartment() {
         return apartment;
     }
@@ -101,16 +90,4 @@ public class Address {
         this.apartment = apartment;
     }
 
-    @Override
-    public String toString() {
-        return "Address{" +
-                "addressId=" + addressId +
-                ", street='" + street + '\'' +
-                ", apartment='" + apartment + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", zip=" + zip +
-                ", users=" + users +
-                '}';
-    }
 }

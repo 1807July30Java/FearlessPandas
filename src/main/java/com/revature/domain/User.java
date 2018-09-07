@@ -27,7 +27,7 @@ public class User {
     private LocalDate birthdate;
     @Column(name = "PAY_EMAIL")
     private String payEmail;
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "USER_ADDRESS",
             joinColumns = {@JoinColumn(name = "USER_ID")},

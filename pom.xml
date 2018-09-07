@@ -1,11 +1,23 @@
+<<<<<<< HEAD
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>>>>>>> 8203db5f5fccc3c0eabe90d06ae95345fa9ac241
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.revature</groupId>
+<<<<<<< HEAD
     <artifactId>BookAuction</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+=======
+    <artifactId>BankAuction</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+>>>>>>> 8203db5f5fccc3c0eabe90d06ae95345fa9ac241
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -23,13 +35,20 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
+<<<<<<< HEAD
             <scope>test</scope>
+=======
+>>>>>>> 8203db5f5fccc3c0eabe90d06ae95345fa9ac241
         </dependency>
 
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
+<<<<<<< HEAD
             <version>1.2.17</version>
+=======
+            <version>1.21</version>
+>>>>>>> 8203db5f5fccc3c0eabe90d06ae95345fa9ac241
         </dependency>
 
         <dependency>
@@ -40,14 +59,35 @@
 
         <dependency>
             <groupId>org.springframework</groupId>
+<<<<<<< HEAD
             <artifactId>spring-webmvc</artifactId>
+=======
+            <artifactId>spring-web</artifactId>
+>>>>>>> 8203db5f5fccc3c0eabe90d06ae95345fa9ac241
             <version>5.0.8.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
+<<<<<<< HEAD
             <artifactId>spring-orm</artifactId>
             <version>4.3.18.RELEASE</version>
+=======
+            <artifactId>spring-webmvc</artifactId>
+            <version>5.0.8.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.1.0.Final</version>
+>>>>>>> 8203db5f5fccc3c0eabe90d06ae95345fa9ac241
         </dependency>
 
         <dependency>
@@ -69,9 +109,24 @@
         </dependency>
 
         <dependency>
+<<<<<<< HEAD
             <groupId>com.oracle.ojdbc</groupId>
             <artifactId>ojdbc</artifactId>
             <version>12.1.0.1</version>
         </dependency>
     </dependencies>
+=======
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>4.3.3.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.6</version>
+        </dependency>
+    </dependencies>
+
+>>>>>>> 8203db5f5fccc3c0eabe90d06ae95345fa9ac241
 </project>

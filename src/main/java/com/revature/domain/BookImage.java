@@ -1,4 +1,4 @@
-package com.revature.beans;
+package com.revature.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,19 +21,17 @@ public class BookImage {
 	private int imageId;
 	@Column(name = "IMAGE_BLOB")
 	private byte[] imageBlob;
-	@Column(name = "BOOK_ID")
-	private int bookId;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "BOOK_ID")
 	private Book book;
 /************************************************************************************************************/
 	//Constructors
 
-public BookImage(int imageId, byte[] imageBlob, int bookId) {
+public BookImage(int imageId, byte[] imageBlob, Book book) {
 	super();
 	this.imageId = imageId;
 	this.imageBlob = imageBlob;
-	this.bookId = bookId;
+	this.book = book;
 }
 public BookImage() {
 	super();
@@ -53,12 +51,7 @@ public byte[] getImageBlob() {
 public void setImageBlob(byte[] imageBlob) {
 	this.imageBlob = imageBlob;
 }
-public int getBookId() {
-	return bookId;
-}
-public void setBookId(int bookId) {
-	this.bookId = bookId;
-}
+
 public Book getBook() {
 	return book;
 }

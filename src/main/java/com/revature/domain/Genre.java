@@ -1,4 +1,4 @@
-package com.revature.beans;
+package com.revature.domain;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +22,18 @@ public class Genre {
 	  private int genreId;
 	  @Column(name = "NAME")
 	  private String name;
-	  @ManyToMany(mappedBy = "genres")
-	    private Set<Book> books = new HashSet<>();
+	public int getGenreId() {
+		return genreId;
+	}
+	public void setGenreId(int genreId) {
+		this.genreId = genreId;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	
 }

@@ -1,6 +1,8 @@
 package com.revature.repository;
 
 import com.revature.domain.User;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+import java.util.ArrayList;
 @Repository(value = "userRepository")
 @Transactional
 @EnableTransactionManagement
@@ -20,7 +22,8 @@ public class UserRepository {
 
     public List<User> getUsers() {
         Session s = sessionFactory.getCurrentSession();
-        return s.createQuery("from User").list();
+        Query q = s.getNamedQuery("getUsers");
+        return (ArrayList<User>)q.list();
     }
 
     public User persisUser(User user) {

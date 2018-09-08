@@ -1,4 +1,4 @@
-package com.revature.beans;
+package com.revature.domain;
 
 import java.time.LocalDate;
 
@@ -22,10 +22,6 @@ public class Bid {
 	@SequenceGenerator(allocationSize = 1, name = "bidSequence", sequenceName = "SQ_BID_PK")
 	@Column(name = "BID_ID")
 	private int bidId;
-	@Column(name = "USER_ID")
-	private int userId;
-	@Column(name = "AUCTION_ID")
-	private int auctionId;
 	@Column(name = "AMOUNT")
 	private int amount;
 	@Column(name = "DATE")
@@ -34,12 +30,42 @@ public class Bid {
 	//Many to one AppUser --> many Auction
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "USER_ID")
-	private AppUser user;	
+	private User user;	
 /*********************************************************************************/	
 	//Many to one AppUser --> many Auction
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "AUCTION_ID")
 	private Auction auction;
-/*********************************************************************************/	
+/*********************************************************************************/
+public int getBidId() {
+	return bidId;
+}
+public void setBidId(int bidId) {
+	this.bidId = bidId;
+}
+public int getAmount() {
+	return amount;
+}
+public void setAmount(int amount) {
+	this.amount = amount;
+}
+public LocalDate getDate() {
+	return date;
+}
+public void setDate(LocalDate date) {
+	this.date = date;
+}
+public User getUser() {
+	return user;
+}
+public void setUser(User user) {
+	this.user = user;
+}
+public Auction getAuction() {
+	return auction;
+}
+public void setAuction(Auction auction) {
+	this.auction = auction;
+}	
 
 }

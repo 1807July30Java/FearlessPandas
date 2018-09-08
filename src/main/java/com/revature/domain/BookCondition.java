@@ -1,4 +1,4 @@
-package com.revature.beans;
+package com.revature.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,17 +22,9 @@ public class BookCondition {
 	private int conditionId;
 	@Column(name = "NAME")
 	private String name;
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "CONDITION_ID")
-	private Book book;
 /************************************************************************************************************/
 	//Constructors
-public BookCondition(int conditionId, String name, Book book) {
-	super();
-	this.conditionId = conditionId;
-	this.name = name;
-	this.book = book;
-	}
+
 public BookCondition(int conditionId, String name) {
 	super();
 	this.conditionId = conditionId;
@@ -57,12 +49,7 @@ public String getName() {
 public void setName(String name) {
 	this.name = name;
 }
-public Book getBook() {
-	return book;
-}
-public void setBook(Book book) {
-	this.book = book;
-}
+
 
 	
 

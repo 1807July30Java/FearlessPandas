@@ -1,4 +1,4 @@
-package com.revature.beans;
+package com.revature.domain;
 
 import java.util.HashSet;
 import java.util.List;
@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -33,16 +34,16 @@ public class Book {
 	private String author;
 	@Column(name = "Description")
 	private String description;
-	@Column(name = "CONDITION_ID")
-	private int conditionId;
+	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JoinColumn(name = "CONDITION_ID")
+	private BookCondition condition;
 	@Column(name = "PUBLISHER")
 	private String publisher;
-	@Column(name = "GENRE_ID")
-	private int genreId;
+
 	
 /*******************************************************************************/
 	//Many to many with genres	
-	 @ManyToMany(cascade = {CascadeType.ALL})
+	 @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	    @JoinTable(
 	            name = "BOOK_GENRE",
 	            joinColumns = {@JoinColumn(name = "BOOK_ID")},
@@ -50,13 +51,9 @@ public class Book {
 	    )
 	 private Set<Genre> genres = new HashSet<>();
 /*******************************************************************************/	
-	 //One to many book to book image
-	@OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<BookImage> bookImages;
+
 /*******************************************************************************/
 	//One to many book to book condition
-	@OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<BookCondition> bookConditions;
 
 /*******************************************************************************/
 	//One to many User --> Auction
@@ -65,19 +62,16 @@ public class Book {
 /*******************************************************************************/
 	//Constructors 
 
-	public Book(int bookId, String title, String author, String description, int conditionId, String publisher, int genreId,
-			Set<Genre> genres, List<BookImage> bookImages, List<BookCondition> bookConditions, List<Auction> auctions) {
+	public Book(int bookId, String title, String author, String description, BookCondition condition, String publisher,
+			Set<Genre> genres, List<Auction> auctions) {
 		super();
 		this.bookId = bookId;
 		this.title = title;
 		this.author = author;
 		this.description = description;
-		this.conditionId = conditionId;
+		this.condition = condition;
 		this.publisher = publisher;
-		this.genreId = genreId;
 		this.genres = genres;
-		this.bookImages = bookImages;
-		this.bookConditions = bookConditions;
 		this.auctions = auctions;
 	}
 /*******************************************************************************/
@@ -106,11 +100,11 @@ public class Book {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public int getConditionId() {
-		return conditionId;
+	public BookCondition getCondition() {
+		return condition;
 	}
-	public void setConditionId(int conditionId) {
-		this.conditionId = conditionId;
+	public void setCondition(BookCondition condition) {
+		this.condition = condition;
 	}
 	public String getPublisher() {
 		return publisher;
@@ -118,29 +112,11 @@ public class Book {
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
-	public int getGenreId() {
-		return genreId;
-	}
-	public void setGenreId(int genreId) {
-		this.genreId = genreId;
-	}
 	public Set<Genre> getGenres() {
 		return genres;
 	}
 	public void setGenres(Set<Genre> genres) {
 		this.genres = genres;
-	}
-	public List<BookImage> getBookImages() {
-		return bookImages;
-	}
-	public void setBookImages(List<BookImage> bookImages) {
-		this.bookImages = bookImages;
-	}
-	public List<BookCondition> getBookConditions() {
-		return bookConditions;
-	}
-	public void setBookConditions(List<BookCondition> bookConditions) {
-		this.bookConditions = bookConditions;
 	}
 	public List<Auction> getAuctions() {
 		return auctions;

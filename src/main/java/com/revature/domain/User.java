@@ -1,10 +1,16 @@
 package com.revature.domain;
 
 import javax.persistence.*;
+
+
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+@NamedQueries({
+	
+	@NamedQuery(name = "getUsers",query = "from User")
+})
 @Entity
 @Table(name = "APP_USER")
 public class User {

@@ -1,4 +1,4 @@
-package com.revature.beans;
+package com.revature.domain;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,10 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.springframework.orm.hibernate3.LocalDataSourceConnectionProvider;
 
 @Entity
 @Table(name = "AUCTION")
@@ -24,12 +24,11 @@ public class Auction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "auctionSequence")
 	@SequenceGenerator(allocationSize = 1, name = "auctionSequence", sequenceName = "SQ_AUCTION_PK")
-	@Column(name = "AUCTION_ID")
+	@JoinColumn(name = "AUCTION_ID")
 	private int auctionId;
-	@Column(name = "BOOK_ID")
-	private int bookId;
-	@Column(name = "USER_ID")
-	private int userId;
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "BOOK_ID")
+	private Book book;
 	@Column(name = "CREATE_DATE")
 	private LocalDate createDate;
 	@Column(name = "END_DATE")
@@ -39,33 +38,28 @@ public class Auction {
 	@Column(name = "BUY_IT_NOW")
 	private int buyItNow;
 /*********************************************************************************/	
-	//Many to one AppUser --> many Auction
-	@ManyToOne(fetch = FetchType.EAGER)
+	//Many to one User --> many Auction
+	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinColumn(name = "USER_ID")
-	private AppUser user;
+	private User user;
 /*********************************************************************************/
-	//Many to one Book --> many Auction
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "BOOK_ID")
-	private Book book;
+
 /*******************************************************************************/	
 	 //One to many auction --> bid
 	@OneToMany(mappedBy = "auction", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Bid> bids;
 /*********************************************************************************/	
 	//Gnerating Constructor
-public Auction(int auctionId, int bookId, int userId, LocalDate createDate, LocalDate endDate, int minimumPrice,
-		int buyItNow, AppUser user, Book book) {
+public Auction(int auctionId, Book book, LocalDate createDate, LocalDate endDate, int minimumPrice,
+		int buyItNow, User user) {
 	super();
 	this.auctionId = auctionId;
-	this.bookId = bookId;
-	this.userId = userId;
+	this.book = book;
 	this.createDate = createDate;
 	this.endDate = endDate;
 	this.minimumPrice = minimumPrice;
 	this.buyItNow = buyItNow;
 	this.user = user;
-	this.book = book;
 }
 /*********************************************************************************/
 	//Getters and Setters
@@ -75,17 +69,11 @@ public int getAuctionId() {
 public void setAuctionId(int auctionId) {
 	this.auctionId = auctionId;
 }
-public int getBookId() {
-	return bookId;
+public Book getBookId() {
+	return book;
 }
-public void setBookId(int bookId) {
-	this.bookId = bookId;
-}
-public int getUserId() {
-	return userId;
-}
-public void setUserId(int userId) {
-	this.userId = userId;
+public void setBookId(Book book) {
+	this.book = book;
 }
 public LocalDate getCreateDate() {
 	return createDate;
@@ -111,10 +99,10 @@ public int getBuyItNow() {
 public void setBuyItNow(int buyItNow) {
 	this.buyItNow = buyItNow;
 }
-public AppUser getUser() {
+public User getUser() {
 	return user;
 }
-public void setUser(AppUser user) {
+public void setUser(User user) {
 	this.user = user;
 }
 public Book getBook() {

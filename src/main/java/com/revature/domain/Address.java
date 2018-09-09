@@ -4,6 +4,11 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@NamedQueries({
+	@NamedQuery(name = "getAddresses", query = "from Address"),
+	@NamedQuery(name  = "getAddressWithoutId",query = "from Address where street = :street and apartment = :apartment and city = :city and state = :state and zip = :zip")
+})
+
 @Entity
 @Table(name = "ADDRESS")
 public class Address {
@@ -88,6 +93,9 @@ public class Address {
 
     public void setApartment(String apartment) {
         this.apartment = apartment;
+    }
+    public String toString() {
+    	return this.street + this.city + this.state + this.apartment + this.zip;
     }
 
 }

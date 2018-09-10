@@ -40,7 +40,8 @@ public class User {
     private String email;
     @Column(name = "PAY_EMAIL")
     private String payEmail;
-
+    @Column(name = "USER_ROLE", columnDefinition = "varchar2(10) default 'USER'")
+    private String userrole;
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "USER_ADDRESS",

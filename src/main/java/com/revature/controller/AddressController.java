@@ -13,7 +13,7 @@ import com.revature.domain.Address;
 import com.revature.service.AddressService;
 
 @RestController("addressController")
-@RequestMapping("/Address")
+@RequestMapping("/address")
 public class AddressController {
 	@Autowired
 	private AddressService addressService;

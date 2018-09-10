@@ -20,6 +20,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+
+
+
 @Entity
 @Table(name="BOOK")
 public class Book {

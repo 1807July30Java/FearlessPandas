@@ -29,19 +29,16 @@ public class UserController {
     @Autowired
     private UserService userService;
     @RequestMapping(value="/all", method=RequestMethod.GET)
-    @ResponseBody
     public ResponseEntity<List<User>> getAllUsers() {
     	ResponseEntity<List<User>> R = new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
     	return  R;
     }
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
-    @ResponseBody
     public ResponseEntity<User> getUserById(@PathVariable int id){
     	ResponseEntity<User> R = new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
     	return  R;
     }
     @RequestMapping(value="/newUser", method=RequestMethod.POST)
-    @ResponseBody
     public ResponseEntity<String> addUser(@RequestBody User u) throws IOException{
     	try {
     		if(userService.getUserByName(u.getUsername()) == null) {
@@ -56,7 +53,6 @@ public class UserController {
     	}
     }
     @PostMapping("/login")
-    @ResponseBody
     public ResponseEntity<User> loginUser(@RequestBody Credentials credentials){
     	try {
     		
@@ -67,7 +63,6 @@ public class UserController {
     	return null;
     }
     @GetMapping("/login")
-    @ResponseBody
     public ResponseEntity<String> loginPage(){
     	return new ResponseEntity<>("Login Page",HttpStatus.OK);
     }

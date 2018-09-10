@@ -2,15 +2,24 @@ package com.revature.domain;
 
 import javax.persistence.*;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
+
 import java.util.HashSet;
 import java.util.Set;
 
 @NamedQueries({
+	@NamedQuery(name = "getUserById",query = "from User where id = :uid"),
 	
-	@NamedQuery(name = "getUsers",query = "from User")
+	@NamedQuery(name = "getUsers",query = "from User"),
+	
+	@NamedQuery(name = "getUserByLogin", query = "from User where username = :username and password = :password"),
+	
+	@NamedQuery(name = "getUserByName", query = "from User where username = :username")
 })
+@Component(value = "User")
+@Scope("Prototype")
 @Entity
 @Table(name = "APP_USER")
 public class User {
@@ -29,10 +38,10 @@ public class User {
     private String lName;
     @Column(name = "EMAIL")
     private String email;
-    @Column(name = "BIRTHDATE")
-    private LocalDate birthdate;
     @Column(name = "PAY_EMAIL")
     private String payEmail;
+    @Column(name = "USER_ROLE", columnDefinition = "varchar2(10) default 'USER'")
+    private String userrole;
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "USER_ADDRESS",
@@ -44,26 +53,15 @@ public class User {
     public User() {
     }
 
-    public User(String username, int password, String fName, String lName, String email, LocalDate birthdate, String payEmail) {
-        this.username = username;
-        this.password = password;
-        this.fName = fName;
-        this.lName = lName;
-        this.email = email;
-        this.birthdate = birthdate;
-        this.payEmail = payEmail;
-    }
 
-    public User(String username, String password, String fName, String lName, String email, LocalDate birthdate, String payEmail) {
+    public User(String username, String password, String fName, String lName, String email, String payEmail) {
         this.username = username;
         this.password = password.hashCode();
         this.fName = fName;
         this.lName = lName;
         this.email = email;
-        this.birthdate = birthdate;
         this.payEmail = payEmail;
     }
-
     public User(String username, String password) {
         this.username = username;
         this.password = password.hashCode();
@@ -92,11 +90,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password.hashCode();
     }
-
-    public void setPassword(int password) {
-        this.password = password;
-    }
-
     public String getfName() {
         return fName;
     }
@@ -121,13 +114,6 @@ public class User {
         this.email = email;
     }
 
-    public LocalDate getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(LocalDate birthdate) {
-        this.birthdate = birthdate;
-    }
 
     public String getPayEmail() {
         return payEmail;
@@ -154,9 +140,11 @@ public class User {
                 ", fName='" + fName + '\'' +
                 ", lName='" + lName + '\'' +
                 ", email='" + email + '\'' +
-                ", birthdate=" + birthdate +
                 ", payEmail='" + payEmail + '\'' +
                 ", addresses=" + addresses +
                 '}';
     }
+
+
+
 }

@@ -16,8 +16,16 @@ public class UserService {
     public List<User> getUsers() {
         return userRepository.getUsers();
     }
-
+    public User getUserById(int id) {
+    	return userRepository.getUserById(id);
+    }
+    public User getUserByLogin(String username, String password) {
+    	return userRepository.getUserByLogin(username,password);
+    }
+    public User getUserByName(String username) {
+    	return userRepository.getUserByName(username);
+    }
     public void addUser(User user) {
-        userRepository.persisUser(user);
+        userRepository.saveUser(user);
     }
 }

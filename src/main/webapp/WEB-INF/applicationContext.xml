@@ -27,6 +27,7 @@
         <property name="packagesToScan">
             <list>
                 <value>com.revature.domain</value>
+                <value>com.revature.beans</value>
             </list>
         </property>
     </bean>
@@ -36,5 +37,8 @@
     </bean>
     
      <bean id = "ObjectMapper" class = "com.fasterxml.jackson.databind.ObjectMapper"></bean>
+	
+    <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+
 
 </beans>

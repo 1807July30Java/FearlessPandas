@@ -20,9 +20,9 @@ public class BookImageController {
 	
 	@Autowired
 	private BookImageService bookImageService;
-	@GetMapping("/{bookId}")
-	public ResponseEntity<List<BookImage>> getBookImageByBookId(@PathVariable int bookId){
-		return new ResponseEntity<>(bookImageService.getBookImageByBookId(bookId), HttpStatus.OK);
+	@GetMapping("/{imageId}")
+	public ResponseEntity<List<BookImage>> getBookImageByBookId(@PathVariable int imageId){
+		return new ResponseEntity<>(bookImageService.getBookImageById(imageId), HttpStatus.OK);
 	}
 	
 /*	@GetMapping("/{id}")

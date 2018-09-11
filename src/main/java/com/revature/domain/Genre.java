@@ -1,11 +1,17 @@
 package com.revature.domain;
 
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-@NamedQueries({
-		@NamedQuery(name = "getGenres", query = "from Genre")
-})
 @Entity
 @Table(name = "Genre")
 public class Genre {

@@ -3,13 +3,11 @@ package com.revature.service;
 import com.revature.domain.User;
 import com.revature.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service(value = "userService")
-@Scope("Prototype")
 public class UserService {
 
     @Autowired

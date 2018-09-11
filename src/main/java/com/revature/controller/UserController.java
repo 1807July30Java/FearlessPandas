@@ -35,7 +35,11 @@ public class UserController {
     }
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
     public ResponseEntity<User> getUserById(@PathVariable int id){
-    	ResponseEntity<User> R = new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
+    	User u = userService.getUserById(id);
+    	if(u!=null) {
+    		u.customUserAspect("get user by id");
+    	}
+    	ResponseEntity<User> R = new ResponseEntity<>(u, HttpStatus.OK);
     	return  R;
     }
     @RequestMapping(value="/newUser", method=RequestMethod.POST)

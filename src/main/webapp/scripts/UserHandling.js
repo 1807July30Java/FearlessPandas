@@ -45,3 +45,11 @@ function makeUser(username,pass){
 	u.addresses = [{}];
 	return u;
 }
+
+/*
+var b = {"title":"The Brothers Karamazov","author":"Fyodor Dostoyevsky","Description":"Existential Russian Romance",}
+var u = {}
+AjaxGet("/user/22",function(xhr){u = JSON.parse(xhr.reponseText);})
+
+
+*/

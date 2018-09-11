@@ -145,6 +145,8 @@ public class User {
                 '}';
     }
 
-
+    public void customUserAspect(String a) {
+    	System.out.println("a");
+    }
 
 }

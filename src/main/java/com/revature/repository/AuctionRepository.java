@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.ArrayList;
-@Repository(value = "userRepository")
+@Repository(value = "auctionRepository")
 @Transactional
 @EnableTransactionManagement
 public class AuctionRepository {

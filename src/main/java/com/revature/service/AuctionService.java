@@ -6,16 +6,17 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.revature.domain.Auction;
+import com.revature.repository.AuctionRepository;
 
 @Service(value = "auctionService")
-@Scope("Prototype")
+@Scope(value = "prototype")
 public class AuctionService {
 	@Autowired
-	AuctionService auctionService;
+	AuctionRepository auctionRepository;
 	public Auction saveAuction(Auction a) {
-		return auctionService.saveAuction(a);
+		return auctionRepository.saveAuction(a);
 	}
 	public Auction getAuctionById(int id) {
-		return auctionService.getAuctionById(id);
+		return auctionRepository.getAuctionById(id);
 	}
 }

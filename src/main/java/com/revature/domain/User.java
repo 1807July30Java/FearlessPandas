@@ -2,6 +2,8 @@ package com.revature.domain;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 

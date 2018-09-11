@@ -20,10 +20,11 @@ public class BookConditionRepository {
 	
 	public BookCondition getConditionByBookId(int conditionId) {
 		Session s = sessionFactory.getCurrentSession();
-		Query q = s.getNamedQuery("getBookConditionById");
-		q.setInteger("conditionId", conditionId);
-		
-		return (BookCondition) q.uniqueResult();
+//		Query q = s.getNamedQuery("getBookConditionById");
+//		q.setInteger("conditionId", conditionId);
+		BookCondition condition = null;
+		condition = (BookCondition) s.get(BookCondition.class, conditionId);
+		return condition;
 	}
 
 }

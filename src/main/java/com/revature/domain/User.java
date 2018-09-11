@@ -2,13 +2,12 @@ package com.revature.domain;
 
 import javax.persistence.*;
 
-import org.hibernate.annotations.NamedQueries;
-import org.hibernate.annotations.NamedQuery;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @NamedQueries({
@@ -44,6 +43,10 @@ public class User {
     private String payEmail;
     @Column(name = "USER_ROLE", columnDefinition = "varchar2(10) default 'USER'")
     private String userrole;
+    
+  
+    
+    
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "USER_ADDRESS",
@@ -51,7 +54,12 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "ADDRESS_ID")}
     )
     private Set<Address> addresses = new HashSet<>();
-
+    
+   
+    
+    
+    
+    
     public User() {
     }
 
@@ -147,8 +155,6 @@ public class User {
                 '}';
     }
 
-    public void customUserAspect(String a) {
-    	System.out.println("a");
-    }
+
 
 }

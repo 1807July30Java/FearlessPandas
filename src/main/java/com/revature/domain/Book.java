@@ -65,8 +65,8 @@ public class Book {
 
 /*******************************************************************************/
 	//One to many User --> Auction
-	@OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Auction> auctions; 
+	/*@OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Auction> auctions;*/ 
 /*******************************************************************************/
 	//Constructors 
 
@@ -80,7 +80,7 @@ public class Book {
 		this.condition = condition;
 		this.publisher = publisher;
 		this.genres = genres;
-		this.auctions = auctions;
+//		this.auctions = auctions;
 	}
 	
 	
@@ -134,12 +134,12 @@ public Book() {
 	public void setGenres(Set<Genre> genres) {
 		this.genres = genres;
 	}
-	public List<Auction> getAuctions() {
+/*	public List<Auction> getAuctions() {
 		return auctions;
 	}
 	public void setAuctions(List<Auction> auctions) {
 		this.auctions = auctions;
-	}
+	}*/
 		
 	
 	

@@ -8,25 +8,26 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.domain.BookImage;
 import com.revature.service.BookImageService;
 
 @RestController("bookImageController")
-@RequestMapping("/Image")
+@RequestMapping("/image")
 public class BookImageController {
 	
 	@Autowired
 	private BookImageService bookImageService;
-	@GetMapping("/{bookid}")
+	@GetMapping("/{bookId}")
 	public ResponseEntity<List<BookImage>> getBookImageByBookId(@PathVariable int bookId){
 		return new ResponseEntity<>(bookImageService.getBookImageByBookId(bookId), HttpStatus.OK);
 	}
 	
-	@GetMapping("/{id}")
+/*	@GetMapping("/{id}")
 	public ResponseEntity<List<BookImage>> getBookImageById(@PathVariable int id){
 		return new ResponseEntity<>(bookImageService.getBookImageByBookId(id), HttpStatus.OK);
-	}
+	}*/
 
 }

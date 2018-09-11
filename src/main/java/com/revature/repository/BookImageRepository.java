@@ -18,9 +18,9 @@ import com.revature.domain.BookImage;
 //DAO Getting book images by book id
 public class BookImageRepository {
 	@Autowired
-	private SessionFactory sf;
+	private SessionFactory sessionFactory;
 	public List<BookImage> getImageByBookId(int bookId){
-		Session s = sf.openSession();
+		Session s = sessionFactory.openSession();
 		Query q = s.getNamedQuery("getBookImageByBookId");
 		q.setInteger("bookId", bookId);
 		return q.list();
@@ -28,7 +28,7 @@ public class BookImageRepository {
 	
 	
 	public List<BookImage> getImageById(int imageId){
-		Session s = sf.openSession();
+		Session s = sessionFactory.openSession();
 		Query q = s.getNamedQuery("getBookImageById");
 		q.setInteger("imageId", imageId);
 		return q.list();

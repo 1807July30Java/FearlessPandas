@@ -54,7 +54,7 @@ function makeAuctions(u){
 	for(var i = 0; i < 10; i ++){
 		auctions.push({
 			"user":u,
-			"book":makeBook("title" + i, "author" + i, "publisher" + i,"GOOD"),
+			"book":  {"bookId":1} ,//makeBook("title" + i, "author" + i, "publisher" + i,"GOOD"),
 			"minimumPrice":20,
 			"buyItNow":45,
 			"createDate":new Date().getTime(),

@@ -23,9 +23,6 @@ public class BookRepository {
 	
 	public Book getBookById(int bookId) {
 		Session s = sessionFactory.getCurrentSession();
-//		Query q = s.getNamedQuery("getBookById");
-//		q.setInteger("bookId", bookId);
-		
 		Book book = null;
 		book = (Book) s.get(Book.class, bookId);		
 		return book;

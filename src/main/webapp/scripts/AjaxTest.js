@@ -50,14 +50,15 @@ function makeBook(title,author,publisher,condition){
 }
 function makeAuctions(u){
 	var auctions = [];
+	console.log("Auction owner:" + JSON.stringify(u));
 	for(var i = 0; i < 10; i ++){
 		auctions.push({
 			"user":u,
 			"book":makeBook("title" + i, "author" + i, "publisher" + i,"GOOD"),
 			"minimumPrice":20,
 			"buyItNow":45,
-			"createDate":null,
-			"endDate":null
+			"createDate":new Date().getTime(),
+			"endDate":new Date().getTime()
 		});
 	}
 	return auctions;
@@ -70,10 +71,13 @@ makeUser("Alpha","pass");
 var genres = [{"name":"Russian Existentialism"},{"name":"Romance"}];
 var condition = {"name":"VeryGood"};
 var im = {"boodId":1,"imageBlob":null};
-AjaxGet("/BookAuction/image/book/1",function(xhr){im = JSON.parse(xhr.responseText);});
+AjaxGet("/BookAuction/image/book/1",function(xhr){im = xhr.responseText;});
 var u = {};
-AjaxGet("/BookAuction/user/username/OPpandas",function(xhr){u = JSON.parse(xhr.reponseText);});
+AjaxGet("/BookAuction/user/username/OPpandas",function(xhr){u = JSON.parse(xhr.responseText);});
+
+
 var auctions = makeAuctions(u);
+
 auctions.forEach(function(element){
 	if(element.user != null){
 		AjaxPost("/BookAuction/auction/new",JSON.stringify(element),function(xhr){console.log(xhr.responseText);});

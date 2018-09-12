@@ -24,6 +24,7 @@ public class AuctionController {
 	}
 	@PostMapping("/new")
 	public ResponseEntity<String> newAuction(@RequestBody Auction A){
+		System.out.println(A.getCreateDate());
 		try {
 			auctionService.saveAuction(A);
 			return new ResponseEntity<>("Successfully created new Auction",HttpStatus.OK);

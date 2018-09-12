@@ -26,19 +26,17 @@ public class AuctionRepository {
         s.saveOrUpdate(a);
         return a;
 	}
-	public Auction saveAuctionWithUserAndBook(Auction a) { //user does not want to be created, and books do want to be created
+	public Auction saveAuctionWithUserAndBook(Auction a) throws Exception { //user does not want to be created, and books do want to be created
 		Session s = sessionFactory.getCurrentSession();
-	
-		
 			User u = a.getUser();
-			a.setUser(null);
-			int id = (int) s.save(a);
 			u = (User)s.get(User.class,u.getUserId());
-			Auction ap = (Auction) s.get(Auction.class,id);
-			ap.setUser(u);
-			s.saveOrUpdate(ap);
-
-			return ap;
+			a.setUser(u);
+			if(u!=null) {
+				s.saveOrUpdate(a);
+			}else {
+				throw new Exception("Invalid: User not in database");
+			}
+			return a;
 		
 	}
 	public Auction getAuctionById(int id) {

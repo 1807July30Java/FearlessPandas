@@ -1,6 +1,9 @@
 package com.revature.domain;
 
+import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -30,9 +33,9 @@ public class Auction {
 	@JoinColumn(name = "BOOK_ID")
 	private Book book;
 	@Column(name = "CREATE_DATE")
-	private LocalDate createDate;
+	private Date createDate;
 	@Column(name = "END_DATE")
-	private LocalDate endDate;
+	private Date endDate;
 	@Column(name = "MINIMUM_PRICE")
 	private int minimumPrice;
 	@Column(name = "BUY_IT_NOW")
@@ -72,17 +75,17 @@ public Book getBookId() {
 public void setBookId(Book book) {
 	this.book = book;
 }
-public LocalDate getCreateDate() {
+public Date getCreateDate() {
 	return createDate;
 }
-public void setCreateDate(LocalDate createDate) {
-	this.createDate = createDate;
+public void setCreateDate(Long createDate) {
+	this.createDate =  new Date(createDate);
 }
-public LocalDate getEndDate() {
+public Date getEndDate() {
 	return endDate;
 }
-public void setEndDate(LocalDate endDate) {
-	this.endDate = endDate;
+public void setEndDate(Long endDate) {
+	this.endDate = new Date(endDate);
 }
 public int getMinimumPrice() {
 	return minimumPrice;

@@ -20,6 +20,8 @@ import java.io.IOException;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController("userController")
 @RequestMapping("/user")
 public class UserController {
@@ -54,10 +56,16 @@ public class UserController {
     	}
     }
     @PostMapping("/login")
-    public ResponseEntity<User> loginUser(@RequestBody Credentials credentials){
+    public ResponseEntity<String> loginUser(HttpServletRequest req, @RequestBody Credentials credentials){
     	try {
+    		User u = userService.getUserByLogin(credentials.getUsername(),credentials.getPass());
+    		if(u != null) {
+    			req.getSession(true).setAttribute("id", u.getUserId());
+    			return new ResponseEntity<>("Successfully logged in as" + u.getUsername(),HttpStatus.OK);
+    		}else {
+    			return new ResponseEntity<>("Username or Password are incorrect",HttpStatus.OK);
+    		}
     		
-    		return new ResponseEntity<>(userService.getUserByLogin(credentials.getUsername(), credentials.getPass()),HttpStatus.OK);
     	}catch 	(Exception e) {
     		e.printStackTrace();
     	}

@@ -39,4 +39,15 @@ public class AuctionController {
 			return new ResponseEntity<>("Failed to create new Auction", HttpStatus.BAD_REQUEST);
 		}
 	}
+	@PostMapping("/new/book")
+	public ResponseEntity<String> newAuctionOldBook(@RequestBody Auction A){
+		System.out.println(A.getCreateDate());
+		try {
+			auctionService.saveAuctionWithBook(A);
+			return new ResponseEntity<>("Successfully created new Auction",HttpStatus.OK);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed to create new Auction", HttpStatus.BAD_REQUEST);
+		}
+	}
 }

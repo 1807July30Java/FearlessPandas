@@ -52,12 +52,12 @@ public class AuctionRepository {
 			return a;
 		
 	}
-	public Auction saveAuctionWithUserAndBookId(Auction a) throws Exception { //user does not want to be created, and books do want to be created
+	public Auction saveAuctionWithUserAndBookId(Auction a) throws Exception { 
 		Session s = sessionFactory.getCurrentSession();
 			User u = a.getUser();
 			u = (User)s.get(User.class,u.getUserId());
 			Book b = a.getBook();
-			b = (Book) s.get(Book.class, b.getBookId());
+			b = (Book) s.get(Book.class, b.getBookId()); 	
 			a.setUser(u);
 			a.setBook(b);
 			if(u!=null && b!= null) {

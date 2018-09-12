@@ -35,10 +35,9 @@ public class UserController {
     }
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
     public ResponseEntity<User> getUserById(@PathVariable int id){
-    	ResponseEntity<User> R = new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
-    	return  R;
+    	return 	new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);  
     }
-    @RequestMapping(value="/newUser", method=RequestMethod.POST)
+    @RequestMapping(value="/new", method=RequestMethod.POST)
     public ResponseEntity<String> addUser(@RequestBody User u) throws IOException{
     	try {
     		if(userService.getUserByName(u.getUsername()) == null) {

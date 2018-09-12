@@ -21,13 +21,13 @@ public class BookImageController {
 	@Autowired
 	private BookImageService bookImageService;
 	@GetMapping("/{imageId}")
-	public ResponseEntity<List<BookImage>> getBookImageByBookId(@PathVariable int imageId){
+	public ResponseEntity<BookImage> getBookImageById(@PathVariable int imageId){
 		return new ResponseEntity<>(bookImageService.getBookImageById(imageId), HttpStatus.OK);
 	}
+	@GetMapping("/book/{id}")
+	public ResponseEntity<List<BookImage>> getBookImageByBookId(@PathVariable int id){
+		return new ResponseEntity<>(bookImageService.getBookImageByBookId(id),HttpStatus.OK);
+	}
 	
-/*	@GetMapping("/{id}")
-	public ResponseEntity<List<BookImage>> getBookImageById(@PathVariable int id){
-		return new ResponseEntity<>(bookImageService.getBookImageByBookId(id), HttpStatus.OK);
-	}*/
 
 }

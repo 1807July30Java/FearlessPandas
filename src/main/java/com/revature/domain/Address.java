@@ -31,14 +31,6 @@ public class Address {
     public Address() {
     }
 
-    public Address(String street, String apartment, String city, String state, int zip, Set<User> users) {
-        this.street = street;
-        this.apartment = apartment;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
-    }
-
     public Address(String street, String apartment, String city, String state, int zip) {
         this.street = street;
         this.apartment = apartment;
@@ -46,7 +38,9 @@ public class Address {
         this.state = state;
         this.zip = zip;
     }
-
+    public Address(int zip) {
+    	this.zip = zip;
+    }
     public int getAddressId() {
         return addressId;
     }

@@ -17,7 +17,10 @@ public class UserService {
         return userRepository.getUsers();
     }
     public User getUserById(int id) {
-    	return userRepository.getUserById(id);
+    	System.out.println("User Being called" + id);
+    	User u = userRepository.getUserById(id);
+    	System.out.println("User" + u.getfName());;
+    	return u;
     }
     public User getUserByLogin(String username, String password) {
     	return userRepository.getUserByLogin(username,password);

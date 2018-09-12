@@ -46,7 +46,7 @@ public class Auction {
 
 /*******************************************************************************/	
 	 //One to many auction --> bid
-	@OneToMany(mappedBy = "auction", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "auction", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Bid> bids;
 /*********************************************************************************/	
 	//Gnerating Constructor

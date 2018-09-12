@@ -15,7 +15,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @NamedQueries({
-	@NamedQuery(name  = "getBookImageByBookId",query = "from BookImage where bookId = :bookId"),
+	@NamedQuery(name  = "getBookImageByBookId",query = "from BookImage where book.bookId = :bookId"),
 	@NamedQuery(name  = "getBookImageById",query = "from BookImage where imageId = :imageId")
 })
 

@@ -21,6 +21,9 @@ public class AuctionService {
 	public Auction saveAuction(Auction a) throws Exception {
 		return auctionRepository.saveAuctionWithUserAndBook(a);
 	}
+	public Auction saveAuctionWithBook(Auction a) throws Exception {
+		return auctionRepository.saveAuctionWithUserAndBookId(a);
+	}
 	public Auction getAuctionById(int id) {
 		return auctionRepository.getAuctionById(id);
 	}

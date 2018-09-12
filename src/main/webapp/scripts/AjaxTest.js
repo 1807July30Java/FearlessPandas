@@ -56,6 +56,7 @@ function makeBook(title, author, publisher, condition) {
 function makeAuctions(u) {
     var auctions = [];
     console.log("Auction owner:" + JSON.stringify(u));
+    var end =  new Date().setMonth(10);
     for (var i = 0; i < 10; i++) {
         auctions.push({
             "user": u,
@@ -63,7 +64,7 @@ function makeAuctions(u) {
             "minimumPrice": 20,
             "buyItNow": 45,
             "createDate": new Date().getTime(),
-            "endDate": new Date().getTime()
+            "endDate": end
         });
     }
     return auctions;

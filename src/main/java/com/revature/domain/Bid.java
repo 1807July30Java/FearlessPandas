@@ -24,8 +24,6 @@ public class Bid {
 	private int bidId;
 	@Column(name = "AMOUNT")
 	private int amount;
-	@Column(name = "DATE")
-	private LocalDate date;
 /*********************************************************************************/	
 	//Many to one AppUser --> many Auction
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -33,7 +31,7 @@ public class Bid {
 	private User user;	
 /*********************************************************************************/	
 	//Many to one AppUser --> many Auction
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "AUCTION_ID")
 	private Auction auction;
 /*********************************************************************************/
@@ -49,12 +47,7 @@ public int getAmount() {
 public void setAmount(int amount) {
 	this.amount = amount;
 }
-public LocalDate getDate() {
-	return date;
-}
-public void setDate(LocalDate date) {
-	this.date = date;
-}
+
 public User getUser() {
 	return user;
 }
@@ -67,5 +60,8 @@ public Auction getAuction() {
 public void setAuction(Auction auction) {
 	this.auction = auction;
 }	
+public String toString() {
+	return "" + this.amount + this.user + this.auction;
+}
 
 }

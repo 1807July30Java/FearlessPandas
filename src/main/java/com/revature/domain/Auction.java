@@ -78,20 +78,12 @@ public class Auction {
         this.createDate = createDate;
     }
 
-    public void setCreateDate(Long createDate) {
-        this.createDate = new Date(createDate);
-    }
-
     public Date getEndDate() {
         return endDate;
     }
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
-    }
-
-    public void setEndDate(Long endDate) {
-        this.endDate = new Date(endDate);
     }
 
     public int getMinimumPrice() {
@@ -134,5 +126,12 @@ public class Auction {
         this.bids = bids;
     }
 /*********************************************************************************/
+
+	@Override
+	public String toString() {
+		return "Auction [auctionId=" + auctionId + ", book=" + book + ", createDate=" + createDate + ", endDate="
+				+ endDate + ", minimumPrice=" + minimumPrice + ", buyItNow=" + buyItNow + ", user=" + user + ", bids="
+				+ bids + "]";
+	}
 
 }

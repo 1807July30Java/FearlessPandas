@@ -1,8 +1,10 @@
 package com.revature.repository;
 
 import com.revature.domain.Auction;
+import com.revature.domain.Book;
 import com.revature.domain.User;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

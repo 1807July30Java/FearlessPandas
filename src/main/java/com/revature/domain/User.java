@@ -1,23 +1,22 @@
 package com.revature.domain;
 
-import javax.persistence.*;
-
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-
+import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @NamedQueries({
-	@NamedQuery(name = "getUserById",query = "from User where id = :uid"),
-	
-	@NamedQuery(name = "getUsers",query = "from User"),
-	
-	@NamedQuery(name = "getUserByLogin", query = "from User where username = :username and password = :password"),
-	
-	@NamedQuery(name = "getUserByName", query = "from User where username = :username")
+        @NamedQuery(name = "getUserById", query = "from User where id = :uid"),
+
+        @NamedQuery(name = "getUsers", query = "from User"),
+
+        @NamedQuery(name = "getUserByLogin", query = "from User where username = :username and password = :password"),
+
+        @NamedQuery(name = "getUserByName", query = "from User where username = :username")
 })
 @Component(value = "User")
 @Scope("Prototype")
@@ -43,10 +42,8 @@ public class User {
     private String payEmail;
     @Column(name = "USER_ROLE", columnDefinition = "varchar2(10) default 'USER'")
     private String userrole;
-    
-  
-    
-    
+
+
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "USER_ADDRESS",
@@ -54,12 +51,8 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "ADDRESS_ID")}
     )
     private Set<Address> addresses = new HashSet<>();
-    
-   
-    
-    
-    
-    
+
+
     public User() {
     }
 
@@ -72,6 +65,7 @@ public class User {
         this.email = email;
         this.payEmail = payEmail;
     }
+
     public User(String username, String password) {
         this.username = username;
         this.password = password.hashCode();
@@ -100,6 +94,7 @@ public class User {
     public void setPassword(String password) {
         this.password = password.hashCode();
     }
+
     public String getfName() {
         return fName;
     }
@@ -141,6 +136,14 @@ public class User {
         this.addresses = addresses;
     }
 
+    public String getUserrole() {
+        return userrole;
+    }
+
+    public void setUserrole(String userrole) {
+        this.userrole = userrole;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -154,7 +157,6 @@ public class User {
                 ", addresses=" + addresses +
                 '}';
     }
-
 
 
 }

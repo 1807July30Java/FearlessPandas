@@ -37,7 +37,7 @@ public class BookRepository {
 	}
 	public List<Book> getBooksByArgs(List<String> args ){
 		Session s = sessionFactory.getCurrentSession();
-		List<Book> ret = new ArrayList<Book>();
+		List<Book> ret = new ArrayList<>();
 		Query q = s.getNamedQuery("getBookByinfo");
 		Iterator<String> i = (Iterator<String>) args.iterator();
 		  while(i.hasNext()) {

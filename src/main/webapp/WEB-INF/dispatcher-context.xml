@@ -8,11 +8,11 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
 
 	<!-- search for Spring beans -->
-	<context:component-scan
-		base-package="com.revature"></context:component-scan>
+    <context:component-scan
+            base-package="com.revature"/>
 
 	<!-- enable MVC annotations -->
-	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:annotation-driven/>
 
 	<!-- set up the View Resolver -->
 	<bean name="viewResolver"
@@ -27,7 +27,7 @@
 
 	<!-- enable static resource retrieval -->
 	<mvc:resources mapping="/static/**"
-		location="/WEB-INF/static/"></mvc:resources>
+				   location="/WEB-INF/static/"/>
 
 
 </beans>

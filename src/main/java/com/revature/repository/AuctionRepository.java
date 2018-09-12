@@ -1,21 +1,20 @@
 package com.revature.repository;
 
 import com.revature.domain.Auction;
-import com.revature.domain.Book;
 import com.revature.domain.User;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import java.util.List;
 import java.sql.Date;
 import java.util.ArrayList;
+
 @Repository(value = "auctionRepository")
 @Transactional
 @EnableTransactionManagement

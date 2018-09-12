@@ -32,9 +32,44 @@ public class Review {
 	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinColumn(name="REVIEWEE_ID")
 	private User reviewee;
-	
-	
-	
-	//Here for the Relationship
 
+	public int getReviewId() {
+		return reviewId;
+	}
+
+	public void setReviewId(int reviewId) {
+		this.reviewId = reviewId;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+
+	public String getDetail() {
+		return detail;
+	}
+
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+
+	public User getReviewer() {
+		return reviewer;
+	}
+
+	public void setReviewer(User reviewer) {
+		this.reviewer = reviewer;
+	}
+
+	public User getReviewee() {
+		return reviewee;
+	}
+
+	public void setReviewee(User reviewee) {
+		this.reviewee = reviewee;
+	}
 }

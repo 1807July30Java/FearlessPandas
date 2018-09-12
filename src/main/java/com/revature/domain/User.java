@@ -136,6 +136,14 @@ public class User {
         this.addresses = addresses;
     }
 
+    public String getUserrole() {
+        return userrole;
+    }
+
+    public void setUserrole(String userrole) {
+        this.userrole = userrole;
+    }
+
     @Override
     public String toString() {
         return "User{" +

@@ -1,12 +1,13 @@
 package com.revature.domain;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @NamedQueries({
-	@NamedQuery(name = "getAddresses", query = "from Address"),
-	@NamedQuery(name  = "getAddressWithoutId",query = "from Address where street = :street and apartment = :apartment and city = :city and state = :state and zip = :zip")
+        @NamedQuery(name = "getAddresses", query = "from Address"),
+        @NamedQuery(name = "getAddressWithoutId", query = "from Address where street = :street and apartment = :apartment and city = :city and state = :state and zip = :zip")
 })
 
 @Entity
@@ -38,9 +39,11 @@ public class Address {
         this.state = state;
         this.zip = zip;
     }
+
     public Address(int zip) {
-    	this.zip = zip;
+        this.zip = zip;
     }
+
     public int getAddressId() {
         return addressId;
     }
@@ -88,8 +91,9 @@ public class Address {
     public void setApartment(String apartment) {
         this.apartment = apartment;
     }
+
     public String toString() {
-    	return this.street + this.city + this.state + this.apartment + this.zip;
+        return this.street + this.city + this.state + this.apartment + this.zip;
     }
 
 }

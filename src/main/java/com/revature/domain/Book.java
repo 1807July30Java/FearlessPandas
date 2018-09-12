@@ -25,7 +25,9 @@ import javax.persistence.Table;
 
 @NamedQueries({
 	@NamedQuery(name  = "getBookById",query = "from Book where bookId = :bookId"),
-	
+	@NamedQuery(name = "getBookByInfo", query = "from Book where title = :title and author = :author and publisher = :publisher"),
+	@NamedQuery(name = "getBooksByGeneralInfo", query = "from Book where title = :title or author = :author or publisher = :publisher"),
+	@NamedQuery(name = "getBookByISBN", query = "from Book where isbn = :isbn")
 })
 
 @Entity
@@ -36,6 +38,8 @@ public class Book {
 	@SequenceGenerator(allocationSize = 1, name = "bookSequence", sequenceName = "SQ_BOOK_PK")
 	@Column(name = "BOOK_ID")
 	private int bookId;
+	@Column(name = "ISBN", columnDefinition = "int default 0")
+	private int isbn = 0;
 	@Column(name = "TITLE")
 	private String title;
 	@Column(name = "AUTHOR")
@@ -70,17 +74,18 @@ public class Book {
 /*******************************************************************************/
 	//Constructors 
 
+	 
 	public Book(int bookId, String title, String author, String description, BookCondition condition, String publisher,
-			Set<Genre> genres, List<Auction> auctions) {
+			Set<Genre> genres) {
 		super();
 		this.bookId = bookId;
+		this.isbn = 0;
 		this.title = title;
 		this.author = author;
 		this.description = description;
 		this.condition = condition;
 		this.publisher = publisher;
 		this.genres = genres;
-//		this.auctions = auctions;
 	}
 	
 	
@@ -140,7 +145,18 @@ public Book() {
 	public void setAuctions(List<Auction> auctions) {
 		this.auctions = auctions;
 	}*/
-		
+
+
+	public int getIsbn() {
+		return isbn;
+	}
+
+
+	public void setIsbn(int isbn) {
+		this.isbn = isbn;
+	}
+
+
 	
 	
 }

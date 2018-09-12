@@ -34,17 +34,7 @@ function User(username,password,fname,lname,email,payEmail,address,birthdate){
 	console.log(u);
 	AjaxPost("newUser",JSON.stringify(u),function(xhr){console.log(xhr.ResponseText)});
 }
-function makeUser(username,pass){
-	var u = {};
-	u.username = username;
-	u.password = pass;
-	u.fname = "Teststein";
-	u.lname = "Testerberg";
-	u.email = "TestyT@Testmail.com";
-	u.payEmail = "TestyT@Testmail.com";
-	u.addresses = [{"street":"Example Blvd","city":"Testerton","apartment":"T35t","state":"TT","zip":06091}];
-	return u;
-}
+
 
 /* 
  * 
@@ -53,12 +43,12 @@ function makeUser(username,pass){
 var genres = [{"name":"Russian Existentialism"},{"name":"Romance"}];
 var condition = {"name":"VeryGood"};
 var im = {"boodId":1,"imageBlob":null};
-//AjaxGet("/BookAuction/image/book/1",function(xhr){im = JSON.parse(xhr.responseText);});
+AjaxGet("/BookAuction/image/book/1",function(xhr){im = JSON.parse(xhr.responseText);});
 var b = {"title":"The Brothers Karamazov","author":"Fyodor Dostoyevsky","Description":"Existential Russian Romance","genres":genres,"bookImages":im,"condition":condition,"publisher":"penguin classics"};
 
 var u = makeUser("EnrenfuchtFraisse","pass");
-//AjaxGet("/BookAuction/user/22",function(xhr){u = console.log(xhr.reponseText);})
+AjaxGet("/BookAuction/user/22",function(xhr){u = console.log(xhr.reponseText);});
 
-var auction = {"user":u,"book":b,"minimumPrice":20,"buyItNow":45,"createDate":null,"endDate":null}
+var auction = {"user":u,"book":b,"minimumPrice":20,"buyItNow":45,"createDate":null,"endDate":null};
 
 AjaxPost("/BookAuction/auction/new",JSON.stringify(auction),function(xhr){xhr.responseText;});

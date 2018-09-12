@@ -1,4 +1,4 @@
-package com.revature.aspect;
+/*package com.revature.aspect;
 
 import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
@@ -21,4 +21,4 @@ public class LoggingAspect {
 		log.error(jp.getSignature()+" threw "+t.getClass()+" with message "+t.getMessage());
 	}
 
-}
+}*/

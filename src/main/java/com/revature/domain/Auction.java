@@ -39,7 +39,7 @@ public class Auction {
 	private int buyItNow;
 /*********************************************************************************/	
 	//Many to one User --> many Auction
-	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "USER_ID")
 	private User user;
 /*********************************************************************************/
@@ -49,17 +49,14 @@ public class Auction {
 	@OneToMany(mappedBy = "auction", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Bid> bids;
 /*********************************************************************************/	
-	//Gnerating Constructor
-public Auction(int auctionId, Book book, LocalDate createDate, LocalDate endDate, int minimumPrice,
-		int buyItNow, User user) {
+public Auction() {
+	
+}
+public Auction(int auctionId, Book book, int minimumPrice,int buyItNow) {
 	super();
 	this.auctionId = auctionId;
-	this.book = book;
-	this.createDate = createDate;
-	this.endDate = endDate;
 	this.minimumPrice = minimumPrice;
 	this.buyItNow = buyItNow;
-	this.user = user;
 }
 /*********************************************************************************/
 	//Getters and Setters

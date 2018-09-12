@@ -12,6 +12,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
+
+@NamedQueries({
+    @NamedQuery(name = "getReviewByReviewerId", query = "from Review where reviewer.userId = :reviewerId"),
+    @NamedQuery(name = "getReviewByRevieweeId", query = "from Review where reviewee.userId = :revieweeId")
+})
+
 @Entity
 @Table(name="REVIEW")
 public class Review {

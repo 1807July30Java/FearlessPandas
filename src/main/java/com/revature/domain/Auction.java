@@ -4,7 +4,11 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
 
-
+@NamedQueries({
+	@NamedQuery(name = "getAllAuctions",query = "from Auction"),
+	@NamedQuery(name = "getAllAuctionsBefore", query = "from Auction where endDate < :end_date")
+	
+})
 @Entity
 @Table(name = "AUCTION")
 public class Auction {

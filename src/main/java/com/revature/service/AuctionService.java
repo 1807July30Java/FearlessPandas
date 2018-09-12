@@ -13,8 +13,8 @@ import com.revature.repository.AuctionRepository;
 public class AuctionService {
 	@Autowired
 	AuctionRepository auctionRepository;
-	public Auction saveAuction(Auction a) {
-		return auctionRepository.saveAuction(a);
+	public Auction saveAuction(Auction a) throws Exception {
+		return auctionRepository.saveAuctionWithUserAndBook(a);
 	}
 	public Auction getAuctionById(int id) {
 		return auctionRepository.getAuctionById(id);

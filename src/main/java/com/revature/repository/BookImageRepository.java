@@ -27,11 +27,10 @@ public class BookImageRepository {
 	}
 	
 	
-	public List<BookImage> getImageById(int imageId){
+	public BookImage getImageById(int imageId){
 		Session s = sessionFactory.openSession();
-		Query q = s.getNamedQuery("getBookImageById");
-		q.setInteger("imageId", imageId);
-		return q.list();
+		
+		return (BookImage)s.get(BookImage.class, imageId);
 		}
 
 }

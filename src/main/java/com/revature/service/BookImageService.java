@@ -17,7 +17,7 @@ public class BookImageService {
 		return bookImageRepository.getImageByBookId(bookId);
 	}
 	
-	public List<BookImage> getBookImageById(int imageId){
+	public BookImage getBookImageById(int imageId){
 		return bookImageRepository.getImageById(imageId);
 	}
 

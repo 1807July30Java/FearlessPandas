@@ -1,5 +1,7 @@
 package com.revature.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,11 @@ public class BookController {
 	@GetMapping("/{bookId}")
 	public ResponseEntity<Book> getBookById(@PathVariable int bookId){
 		return new ResponseEntity<>(bookService.getBookById(bookId),HttpStatus.OK);
+	}
+	@GetMapping("/info/{title}/{author}/{publisher}") 
+	public ResponseEntity<List<Book>> getBooksByInfo(@PathVariable String title,@PathVariable String author,@PathVariable String publisher){
+		System.out.print(title + author + publisher);
+		return new ResponseEntity<>(bookService.getBooksByInfo(title, author, publisher),HttpStatus.OK);
 	}
 
 }

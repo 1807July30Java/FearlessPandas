@@ -17,13 +17,29 @@ public class UserService {
         return userRepository.getUsers();
     }
     public User getUserById(int id) {
-    	return userRepository.getUserById(id);
+    	User u = userRepository.getUserById(id);
+    	u.setPassword("");
+    	u.setAddresses(null);
+    	u.setEmail("");
+    	u.setlName("");
+    	u.setfName("");
+    	u.setPayEmail("");
+    	return u;
     }
     public User getUserByLogin(String username, String password) {
     	return userRepository.getUserByLogin(username,password);
     }
     public User getUserByName(String username) {
-    	return userRepository.getUserByName(username);
+    	User u = userRepository.getUserByName(username);
+    	if(u != null) {
+	    	u.setPassword("");
+	    	u.setAddresses(null);
+	    	u.setEmail("");
+	    	u.setlName("");
+	    	u.setfName("");
+	    	u.setPayEmail("");
+    	}
+    	return u;
     }
     public void addUser(User user) {
         userRepository.saveUser(user);

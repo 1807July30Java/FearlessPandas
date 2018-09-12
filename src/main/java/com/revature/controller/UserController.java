@@ -22,6 +22,8 @@ import java.io.IOException;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController("userController")
 @RequestMapping("/user")
 public class UserController {
@@ -35,10 +37,13 @@ public class UserController {
     }
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
     public ResponseEntity<User> getUserById(@PathVariable int id){
-    	ResponseEntity<User> R = new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
-    	return  R;
+    	return 	new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);  
     }
-    @RequestMapping(value="/newUser", method=RequestMethod.POST)
+    @GetMapping("/username/{username}")
+    public ResponseEntity<User> getUserByUsername(@PathVariable String username){
+    	return new ResponseEntity<>(userService.getUserByName(username),HttpStatus.OK);
+    }
+    @PostMapping("/new")
     public ResponseEntity<String> addUser(@RequestBody User u) throws IOException{
     	try {
     		if(userService.getUserByName(u.getUsername()) == null) {
@@ -61,10 +66,6 @@ public class UserController {
     		e.printStackTrace();
     	}
     	return null;
-    }
-    @GetMapping("/login")
-    public ResponseEntity<String> loginPage(){
-    	return new ResponseEntity<>("Login Page",HttpStatus.OK);
     }
 
 }

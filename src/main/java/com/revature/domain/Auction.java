@@ -1,6 +1,9 @@
 package com.revature.domain;
 
+import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -30,36 +33,33 @@ public class Auction {
 	@JoinColumn(name = "BOOK_ID")
 	private Book book;
 	@Column(name = "CREATE_DATE")
-	private LocalDate createDate;
+	private Date createDate;
 	@Column(name = "END_DATE")
-	private LocalDate endDate;
+	private Date endDate;
 	@Column(name = "MINIMUM_PRICE")
 	private int minimumPrice;
 	@Column(name = "BUY_IT_NOW")
 	private int buyItNow;
 /*********************************************************************************/	
 	//Many to one User --> many Auction
-	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "USER_ID")
 	private User user;
 /*********************************************************************************/
 
 /*******************************************************************************/	
 	 //One to many auction --> bid
-	@OneToMany(mappedBy = "auction", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "auction", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Bid> bids;
 /*********************************************************************************/	
-	//Gnerating Constructor
-public Auction(int auctionId, Book book, LocalDate createDate, LocalDate endDate, int minimumPrice,
-		int buyItNow, User user) {
+public Auction() {
+	
+}
+public Auction(int auctionId, Book book, int minimumPrice,int buyItNow) {
 	super();
 	this.auctionId = auctionId;
-	this.book = book;
-	this.createDate = createDate;
-	this.endDate = endDate;
 	this.minimumPrice = minimumPrice;
 	this.buyItNow = buyItNow;
-	this.user = user;
 }
 /*********************************************************************************/
 	//Getters and Setters
@@ -75,17 +75,17 @@ public Book getBookId() {
 public void setBookId(Book book) {
 	this.book = book;
 }
-public LocalDate getCreateDate() {
+public Date getCreateDate() {
 	return createDate;
 }
-public void setCreateDate(LocalDate createDate) {
-	this.createDate = createDate;
+public void setCreateDate(Long createDate) {
+	this.createDate =  new Date(createDate);
 }
-public LocalDate getEndDate() {
+public Date getEndDate() {
 	return endDate;
 }
-public void setEndDate(LocalDate endDate) {
-	this.endDate = endDate;
+public void setEndDate(Long endDate) {
+	this.endDate = new Date(endDate);
 }
 public int getMinimumPrice() {
 	return minimumPrice;

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.domain.Auction;
 import com.revature.service.AuctionService;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController("auctionController")
 @RequestMapping("/auction")
 public class AuctionController {
@@ -31,6 +33,10 @@ public class AuctionController {
 	@GetMapping("/closed/{id}")
 	public ResponseEntity<Boolean> isClosed(@PathVariable int id){
 		return new ResponseEntity<>(auctionService.isClosed(id),HttpStatus.OK);
+	}
+	@GetMapping("/this")
+	public ResponseEntity<List<Auction>> getAllUserAuctions(HttpServletRequest req) {
+		return new ResponseEntity<>(auctionService.getAllUserAuctions((int)req.getSession(false).getAttribute("id")),HttpStatus.OK);
 	}
 	@PostMapping("/new")
 	public ResponseEntity<String> newAuction(@RequestBody Auction A){

@@ -28,9 +28,6 @@ public class BidRepository {
 	    
 		if(a != null && a.getEndDate().getTime() > d.getTime()) {
 			b.setAuction(a);
-			a.getBids().add(b);
-			a.setBids(a.getBids());
-			s.saveOrUpdate(a);
 			s.saveOrUpdate(b);
 		}else {
 			throw new Exception("No auction with that id");

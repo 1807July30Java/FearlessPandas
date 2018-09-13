@@ -22,4 +22,14 @@ public class ResourceController {
     public String getProfileJS() {
         return "forward:/static/js/profile.js";
     }
+
+    @GetMapping("/auctions")
+    public String getAuctions() {
+        return "forward:/static/views/auctions.html";
+    }
+
+    @GetMapping("/auctionsJS")
+    public String getAuctionsJS() {
+        return "forward:/static/js/auctions.js";
+    }
 }

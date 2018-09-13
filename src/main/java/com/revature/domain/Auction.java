@@ -1,14 +1,15 @@
 package com.revature.domain;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 import javax.persistence.*;
 import java.sql.Date;
-import java.time.LocalDateTime;
-import java.util.List;
 
 @NamedQueries({
-	@NamedQuery(name = "getAllAuctions",query = "from Auction"),
-	@NamedQuery(name = "getAllAuctionsBefore", query = "from Auction where endDate < :end_date")
-	
+        @NamedQuery(name = "getAllAuctions", query = "from Auction"),
+        @NamedQuery(name = "getAllAuctionsBefore", query = "from Auction where endDate < :end_date"),
+        @NamedQuery(name = "getUserAuctions", query = "from Auction where user.userId is :userId")
 })
 @Entity
 @Table(name = "AUCTION")
@@ -36,12 +37,9 @@ public class Auction {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "USER_ID")
     private User user;
-/*********************************************************************************/
+    /*********************************************************************************/
 
-    /*******************************************************************************/
-    //One to many auction --> bid
-    @OneToMany(mappedBy = "auction", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Bid> bids;
+    /*********************************************************************************/
 
     /*********************************************************************************/
     public Auction() {
@@ -121,28 +119,20 @@ public class Auction {
         this.book = book;
     }
 
-    public List<Bid> getBids() {
-        return bids;
-    }
-
-    public void setBids(List<Bid> bids) {
-        this.bids = bids;
-    }
-/*********************************************************************************/
+    /*********************************************************************************/
     public boolean isClosed() {
-    	Long a = (System.currentTimeMillis() - this.endDate.getTime());
-    	return a > 0; 
+        Long a = (System.currentTimeMillis() - this.endDate.getTime());
+        return a > 0;
     }
-    
-	@Override
-	public String toString() {
-		return "Auction [auctionId=" + auctionId + ", book=" + book + ", createDate=" + createDate + ", endDate="
-				+ endDate + ", minimumPrice=" + minimumPrice + ", buyItNow=" + buyItNow + ", user=" + user + ", bids="
-				+ bids + "]";
-	}
 
-	public void setClosed(boolean isClosed) {
-		this.isClosed = this.endDate.getTime() < System.currentTimeMillis();
-	}
+    public void setClosed(boolean isClosed) {
+        this.isClosed = this.endDate.getTime() < System.currentTimeMillis();
+    }
+
+    @Override
+    public String toString() {
+        return "Auction [auctionId=" + auctionId + ", book=" + book + ", createDate=" + createDate + ", endDate="
+                + endDate + ", minimumPrice=" + minimumPrice + ", buyItNow=" + buyItNow + ", user=" + user + ", bids=" + "]";
+    }
 
 }

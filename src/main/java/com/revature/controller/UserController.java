@@ -51,7 +51,7 @@ public class UserController {
         return new ResponseEntity<>(userService.getUserById(req, (int)req.getSession(false).getAttribute("id")),HttpStatus.OK);
         }else {
             try {
-                res.sendRedirect("login");
+                res.sendRedirect("../login");
             } catch (IOException e) {
                 e.printStackTrace();
             }

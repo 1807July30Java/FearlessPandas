@@ -94,6 +94,7 @@ public class User {
     public void setPassword(String password) {
         this.password = password.hashCode();
     }
+  
 
     public String getfName() {
         return fName;

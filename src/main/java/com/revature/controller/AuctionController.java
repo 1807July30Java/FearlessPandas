@@ -28,6 +28,10 @@ public class AuctionController {
 	public ResponseEntity<List<Auction>> getAllAuctions(){
 		return new ResponseEntity<>(auctionService.getAllAuctions(),HttpStatus.OK);
 	}
+	@GetMapping("/closed/{id}")
+	public ResponseEntity<Boolean> isClosed(@PathVariable int id){
+		return new ResponseEntity<>(auctionService.isClosed(id),HttpStatus.OK);
+	}
 	@PostMapping("/new")
 	public ResponseEntity<String> newAuction(@RequestBody Auction A){
 		System.out.println(A.getCreateDate());

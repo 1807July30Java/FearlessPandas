@@ -1,6 +1,8 @@
 package com.revature.repository;
 
 import com.revature.domain.Genre;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +28,11 @@ public class GenreRepository {
     public Genre getGenreById(int id) {
         Session s = sessionFactory.getCurrentSession();
         return (Genre) s.get(Genre.class, id);
+    }
+    public Genre getGenreByName(String name) {
+    	Session s = sessionFactory.getCurrentSession();
+    	Query q = s.getNamedQuery("getGenreByName");
+    	q.setString("name", name);
+    	return (Genre) q.uniqueResult();
     }
 }

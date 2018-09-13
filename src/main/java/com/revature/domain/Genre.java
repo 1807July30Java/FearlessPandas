@@ -5,9 +5,10 @@ import org.hibernate.annotations.NamedQuery;
 
 import javax.persistence.*;
 
-@NamedQueries(
-		@NamedQuery(name = "getGenres", query = "from Genre")
-)
+@NamedQueries({
+		@NamedQuery(name = "getGenres", query = "from Genre"),
+		@NamedQuery(name = "getGenreByName",query = "from Genre where name = :name order by genreId asc")
+})
 
 @Entity
 @Table(name = "Genre")

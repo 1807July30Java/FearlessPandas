@@ -49,4 +49,12 @@ public class UserService {
     public void addUser(User user) {
         userRepository.saveUser(user);
     }
+    
+    public User updateUser(String username, String fName, String lName,int userId) {
+    	return userRepository.updateUser(username, fName, lName, userId);
+    }
+    
+    public User updatePassword(String oldPassword, String newPassword, int userId) {
+    	return userRepository.updatePassword(oldPassword, newPassword, userId);
+    }
 }

@@ -6,7 +6,8 @@ import org.hibernate.annotations.NamedQuery;
 import javax.persistence.*;
 
 @NamedQueries({
-        @NamedQuery(name = "getBookConditionById", query = "from BookCondition where conditionId = :conditionId")
+        @NamedQuery(name = "getBookConditionById", query = "from BookCondition where conditionId = :conditionId"),
+        @NamedQuery(name = "getConditionByName", query = "from BookCondition where name = :name order by conditionId asc")
 })
 
 @Entity

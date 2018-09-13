@@ -42,7 +42,7 @@ public class BookRepository {
 		Session s = sessionFactory.getCurrentSession();
 		List<Book> ret = new ArrayList<>();
 		Query q = s.getNamedQuery("getBookByinfo");
-		Iterator<String> i = (Iterator<String>) args.iterator();
+		Iterator<String> i = args.iterator();
 		  while(i.hasNext()) {
 			  String a0 = i.next();
 			  Iterator j = i;

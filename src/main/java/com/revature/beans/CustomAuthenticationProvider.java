@@ -31,7 +31,7 @@ public class CustomAuthenticationProvider
             Query q = s.getNamedQuery("getUserByLogin");
             q.setString("username",name);
             q.setInteger("password", password.hashCode());
-            if((User)q.uniqueResult()!= null) {
+            if(q.uniqueResult() != null) {
             	s.close();
             return new UsernamePasswordAuthenticationToken(
               name, password, new ArrayList<>());

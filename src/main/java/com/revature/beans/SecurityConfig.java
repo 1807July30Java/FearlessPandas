@@ -16,7 +16,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	CustomAuthenticationProvider authprovider;
 	
 	@Autowired
-	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+	public void configAuthentication(AuthenticationManagerBuilder auth) {
 		
 	  auth.authenticationProvider(authprovider);
 	}

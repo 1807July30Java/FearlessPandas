@@ -8,24 +8,22 @@ function AjaxGet(url, func) {
         if (this.readyState == 4 && this.status == 200) {
             func(this);
         }
-    }
+    };
     xhr.open("GET", url, true);
     xhr.send();
-};
-
+}
 function AjaxPost(url, body, func) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             func(this);
         }
-    }
+    };
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Accept", "application/json");
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(body);
-};
-
+}
 function makeUser(username, pass) {
     var u = {};
     u.username = username;
@@ -93,4 +91,4 @@ auctions.forEach(function (element) {
             console.log(xhr.responseText);
         });
     }
-})
+});

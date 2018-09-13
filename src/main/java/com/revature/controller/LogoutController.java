@@ -24,8 +24,9 @@ public class LogoutController {
 		System.out.println("logging out");
 		Authentication auth =  SecurityContextHolder.getContext().getAuthentication();
 		if(auth != null) {
-			System.out.println("really logging out");
 			new SecurityContextLogoutHandler().logout(req, res,auth);
+			req.getSession(false).setAttribute("id", 0);
+			req.getSession(false).invalidate(); 
 		}	
       return new ResponseEntity<>("LogoutPage",HttpStatus.OK);
     }

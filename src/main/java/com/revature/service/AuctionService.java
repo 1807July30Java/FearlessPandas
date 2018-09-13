@@ -33,4 +33,8 @@ public class AuctionService {
 	public List<Auction> getAllAuctionsBefore(Date d){
 		return auctionRepository.getAllAuctionsBefore(d);
 	}
+	public boolean isClosed(int id) {
+		Auction a = auctionRepository.getAuctionById(id);
+		return auctionRepository.isClosed(a);
+	}
 }

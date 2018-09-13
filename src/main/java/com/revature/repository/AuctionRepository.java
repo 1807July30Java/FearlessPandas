@@ -39,12 +39,12 @@ public class AuctionRepository {
 		q.setDate("end_date", d);
 		return q.list();
 	}
-	public Auction saveAuctionWithUserAndBook(Auction a) throws Exception { //user does not want to be created, and books do want to be created
+	public Auction saveAuctionWithUserAndBook(Auction a) throws Exception { //Save auction with new book not yet in db
 		Session s = sessionFactory.getCurrentSession();
 			User u = a.getUser();
 			u = (User)s.get(User.class,u.getUserId());
 			a.setUser(u);
-			if(u!=null) {
+			if(u!=null && !a.isClosed()) {
 				s.saveOrUpdate(a);
 			}else {
 				throw new Exception("Invalid: User not in database");
@@ -52,7 +52,7 @@ public class AuctionRepository {
 			return a;
 		
 	}
-	public Auction saveAuctionWithUserAndBookId(Auction a) throws Exception { 
+	public Auction saveAuctionWithUserAndBookId(Auction a) throws Exception { //saves auction with book that is already in db
 		Session s = sessionFactory.getCurrentSession();
 			User u = a.getUser();
 			u = (User)s.get(User.class,u.getUserId());
@@ -60,7 +60,7 @@ public class AuctionRepository {
 			b = (Book) s.get(Book.class, b.getBookId()); 	
 			a.setUser(u);
 			a.setBook(b);
-			if(u!=null && b!= null) {
+			if(u!=null && b!= null && !a.isClosed()) {
 				s.saveOrUpdate(a);
 			}else {
 				throw new Exception("Invalid: User or Book not in database");
@@ -71,5 +71,18 @@ public class AuctionRepository {
 	public Auction getAuctionById(int id) {
 		Session s = sessionFactory.getCurrentSession();
 		return (Auction) s.get(Auction.class, id);
+	}
+	public void setClosed(Auction a) {
+	
+		Session s = sessionFactory.getCurrentSession();
+		a = (Auction) s.get(Auction.class, a.getAuctionId());
+		a.setClosed(true);
+		s.saveOrUpdate(a);
+		
+	}
+	public boolean isClosed(Auction a) {
+		Session s = sessionFactory.getCurrentSession();
+		a = (Auction)s.get(Auction.class, a.getAuctionId());
+		return a.isClosed();
 	}
 }

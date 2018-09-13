@@ -2,6 +2,7 @@ package com.revature.domain;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @NamedQueries({
@@ -28,6 +29,8 @@ public class Auction {
     private int minimumPrice;
     @Column(name = "BUY_IT_NOW")
     private int buyItNow;
+    @Column(name = "ISCLOSED")
+    private boolean isClosed;
     /*********************************************************************************/
     //Many to one User --> many Auction
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
@@ -126,12 +129,19 @@ public class Auction {
         this.bids = bids;
     }
 /*********************************************************************************/
-
+    public boolean isClosed() {
+    	return  this.endDate.getTime() < System.currentTimeMillis();
+    }
+    
 	@Override
 	public String toString() {
 		return "Auction [auctionId=" + auctionId + ", book=" + book + ", createDate=" + createDate + ", endDate="
 				+ endDate + ", minimumPrice=" + minimumPrice + ", buyItNow=" + buyItNow + ", user=" + user + ", bids="
 				+ bids + "]";
+	}
+
+	public void setClosed(boolean isClosed) {
+		this.isClosed = this.endDate.getTime() < System.currentTimeMillis();
 	}
 
 }

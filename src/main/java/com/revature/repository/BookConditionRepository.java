@@ -1,6 +1,7 @@
 package com.revature.repository;
 
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,10 @@ public class BookConditionRepository {
 		condition = (BookCondition) s.get(BookCondition.class, conditionId);
 		return condition;
 	}
-
+	public BookCondition getConditionByName(String name) {
+		Session s = sessionFactory.getCurrentSession();
+		Query q = s.getNamedQuery("getBookConditionById");
+		q.setString("getConditionByName", name);
+		return (BookCondition) q.uniqueResult();
+	}
 }

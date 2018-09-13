@@ -2,6 +2,8 @@ package com.revature.repository;
 
 import com.revature.domain.Auction;
 import com.revature.domain.Book;
+import com.revature.domain.BookCondition;
+import com.revature.domain.Genre;
 import com.revature.domain.User;
 
 import org.hibernate.Query;
@@ -14,8 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
+import java.util.Set;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 @Repository(value = "auctionRepository")
 @Transactional
@@ -39,20 +43,41 @@ public class AuctionRepository {
 		q.setDate("end_date", d);
 		return q.list();
 	}
-	public Auction saveAuctionWithUserAndBook(Auction a) throws Exception { //user does not want to be created, and books do want to be created
+	public Auction saveAuctionWithUserAndBook(Auction a) throws Exception { //Save auction with new book not yet in db
 		Session s = sessionFactory.getCurrentSession();
 			User u = a.getUser();
+			Set<Genre> G = a.getBook().getGenres();
+			BookCondition BC = a.getBook().getCondition();
+			Query Q = s.getNamedQuery("getConditionByName");
+			Q.setString("name",BC.getName());
+			List<BookCondition> pBC = Q.list();
+			a.getBook().setCondition(null);
+			if( pBC.size()>0) {
+				a.getBook().setCondition(pBC.get(0));
+			}
+			HashSet<Genre> processedGenres = new HashSet<Genre>(0);
+			for(Genre g:G) { ///ensures that duplicate genres are not added;
+				Query q = s.getNamedQuery("getGenreByName");
+				q.setString("name",	g.getName());
+				List<Genre> gg =  q.list();
+				if ( gg.size()>0) {
+				      processedGenres.add(gg.get(0));
+				}else {
+					processedGenres.add(g);
+				}
+			}
+			a.getBook().setGenres(processedGenres);
 			u = (User)s.get(User.class,u.getUserId());
 			a.setUser(u);
-			if(u!=null) {
+			if(u!=null && !a.isClosed()) {
 				s.saveOrUpdate(a);
 			}else {
-				throw new Exception("Invalid: User not in database");
+				throw new Exception("Invalid: User not in database or Auction is closed");
 			}
 			return a;
 		
 	}
-	public Auction saveAuctionWithUserAndBookId(Auction a) throws Exception { 
+	public Auction saveAuctionWithUserAndBookId(Auction a) throws Exception { //saves auction with book that is already in db
 		Session s = sessionFactory.getCurrentSession();
 			User u = a.getUser();
 			u = (User)s.get(User.class,u.getUserId());
@@ -60,10 +85,10 @@ public class AuctionRepository {
 			b = (Book) s.get(Book.class, b.getBookId()); 	
 			a.setUser(u);
 			a.setBook(b);
-			if(u!=null && b!= null) {
+			if(u!=null && b!= null && !a.isClosed()) {
 				s.saveOrUpdate(a);
 			}else {
-				throw new Exception("Invalid: User or Book not in database");
+				throw new Exception("Invalid: User or Book not in database or Auction is closed");
 			}
 			return a;
 		
@@ -71,5 +96,18 @@ public class AuctionRepository {
 	public Auction getAuctionById(int id) {
 		Session s = sessionFactory.getCurrentSession();
 		return (Auction) s.get(Auction.class, id);
+	}
+	public void setClosed(Auction a) {
+	
+		Session s = sessionFactory.getCurrentSession();
+		a = (Auction) s.get(Auction.class, a.getAuctionId());
+		a.setClosed(true);
+		s.saveOrUpdate(a);
+		
+	}
+	public boolean isClosed(Auction a) {
+		Session s = sessionFactory.getCurrentSession();
+		a = (Auction)s.get(Auction.class, a.getAuctionId());
+		return a.isClosed();
 	}
 }

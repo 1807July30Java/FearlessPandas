@@ -22,7 +22,11 @@ public class AuctionService {
 		return auctionRepository.saveAuctionWithUserAndBook(a);
 	}
 	public Auction saveAuctionWithBook(Auction a) throws Exception {
-		return auctionRepository.saveAuctionWithUserAndBookId(a);
+		if(a.getEndDate().getTime() - a.getCreateDate().getTime() > 0) {
+			return auctionRepository.saveAuctionWithUserAndBookId(a);
+		}else {
+			throw new Exception("Ending date must be after start date");
+		}
 	}
 	public Auction getAuctionById(int id) {
 		return auctionRepository.getAuctionById(id);
@@ -32,5 +36,9 @@ public class AuctionService {
 	}
 	public List<Auction> getAllAuctionsBefore(Date d){
 		return auctionRepository.getAllAuctionsBefore(d);
+	}
+	public boolean isClosed(int id) {
+		Auction a = auctionRepository.getAuctionById(id);
+		return auctionRepository.isClosed(a);
 	}
 }

@@ -35,6 +35,13 @@ function User(username,password,fname,lname,email,payEmail,address,birthdate){
 	AjaxPost("newUser",JSON.stringify(u),function(xhr){console.log(xhr.ResponseText)});
 }
 
+function userLogin(){
+	var u  = document.getElementById("username");
+	var p = documenet.getElementById("password");
+	var credentials = {"username":u.innerText,"pass":p.innerText};
+	console.log(credentials);
+	AjaxPost("/Book/login",JSON.stringify(credentials),function(xhr){});
+}
 
 /* 
  * 

@@ -1,3 +1,4 @@
+/*
 package com.revature.beans;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,3 +32,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .httpBasic();
     }
 }
+*/

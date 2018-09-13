@@ -26,7 +26,11 @@
             var p = document.getElementById("inputPassword");
             var credentials = {"username":u.value,"pass":p.value};
             console.log(credentials);
-            AjaxPost("login",JSON.stringify(credentials),function(xhr){window.location.pathname=xhr.responseText;});
+            console.log(window.location.pathname);
+            AjaxPost("login",JSON.stringify(credentials),function(xhr){
+            	
+            	window.location.pathname = window.location.pathname.replace("/login",xhr.responseText);
+            });
         }
     </script>
 

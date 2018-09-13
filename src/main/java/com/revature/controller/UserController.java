@@ -78,11 +78,13 @@ public class UserController {
     
     public ResponseEntity<User> updatePassword(HttpServletRequest req, @RequestBody UpdateInfo info){
     	HttpSession ses = req.getSession(false);
-    	if(ses!= null && ses.getAttribute("id")!= null) {
+    	
+    	User authenticatedU = userService.getUserByLogin(info.getUsername(), info.getOldPassword());
+    	if(ses!= null && authenticatedU!= null) {
     		String oldPassword = info.getOldPassword();
     		String newPassword = info.getNewPassword();
-    		int userId = (int) ses.getAttribute("id");
-    		return new ResponseEntity<User>(userService.updatePassword(oldPassword, newPassword, userId),HttpStatus.OK);
+    		int id = (int) ses.getAttribute("id");
+    		return new ResponseEntity<User>(userService.updatePassword(oldPassword, newPassword, id),HttpStatus.OK);
     	}else {
     		System.out.println("failed");
     		return null;

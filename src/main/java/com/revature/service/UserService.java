@@ -27,7 +27,10 @@ public class UserService {
     	return u;
     }
     public User getUserByLogin(String username, String password) {
-    	return userRepository.getUserByLogin(username,password);
+    	return userRepository.getUserByLogin(username,password.hashCode());
+    }
+    public User getUserByLogin(String username, int password) {
+    	return userRepository.getUserByLogin(username, password);
     }
     public User getUserByName(String username) {
     	User u = userRepository.getUserByName(username);

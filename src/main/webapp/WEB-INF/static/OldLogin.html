@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+
 <script rel = "text/javascript">
 function AjaxPost(url,body, func){
 	  var xhr = new XMLHttpRequest();
@@ -21,7 +22,7 @@ function AjaxPost(url,body, func){
 		var p = document.getElementById("password");
 		var credentials = {"username":u.value,"pass":p.value};
 		console.log(credentials);
-		AjaxPost("/BookAuction/login",JSON.stringify(credentials),function(xhr){console.log(xhr.responseText);});
+		AjaxPost("login",JSON.stringify(credentials),function(xhr){console.log(xhr.responseText);});
 	}
 </script>
 <title>Login</title>

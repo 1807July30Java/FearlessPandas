@@ -24,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable() //disabled for testing
-        	.authorizeRequests().anyRequest().fullyAuthenticated()
+        	.authorizeRequests().antMatchers("/admin").fullyAuthenticated()
             .and()
             .logout().deleteCookies("rememberme").logoutUrl("/BookAuction/logout").logoutSuccessUrl("/BookAuction/Login")
             .and()

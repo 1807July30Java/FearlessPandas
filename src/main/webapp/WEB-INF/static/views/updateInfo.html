@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<script rel = "text/javascript">
+function AjaxPost(url,body, func){
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function (){
+        if(this.readyState==4 && this.status == 200){
+          func(this);
+        }
+      }
+      xhr.open("POST",url,true);
+      xhr.setRequestHeader("Accept","application/json");
+      xhr.setRequestHeader("Content-Type","application/json");
+      xhr.send(body);
+    };
+    
+    function userUpdate(){
+        var u  = document.getElementById("username");
+        var f = document.getElementById("firstName");
+        var l = document.getElementById("lastName");
+        var info = {"username":u.value,"firstName":f.value, "lastName": l.value};
+        console.log(info);
+        AjaxPost("user/updateInfo",JSON.stringify(info),function(xhr){console.log(xhr.responseText);});
+    }
+    function passUpdate(){
+        var p1  = document.getElementById("oldPassword");
+        var p2 = document.getElementById("newPassword");  
+        var info = {"oldPassword":p1.value,"newPassword":p2.value};
+        console.log(info);
+        AjaxPost("user/updatePassword",JSON.stringify(info),function(xhr){console.log(xhr.responseText);});
+    }
+</script>
+<title>Update</title>
+</head>
+<body>
+</body>

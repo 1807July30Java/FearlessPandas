@@ -14,8 +14,19 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public List<User> getUsers() {
-        return userRepository.getUsers();
+    public List<User> getUsers(int id) {
+    	List<User> res = userRepository.getUsers();
+        for(User u:res) {
+        	if(u.getUserId() != id) {
+        		u.setPassword("");
+    			u.setAddresses(null);
+    			u.setEmail("");
+    			u.setlName("");
+    			u.setfName("");
+    			u.setPayEmail("");
+        	}
+        }
+    	return res;
     }
 
     public User getUserById(HttpServletRequest req, int id) {

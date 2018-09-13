@@ -31,8 +31,8 @@ public class UserController {
     @Autowired
     private UserService userService;
     @RequestMapping(value="/all", method=RequestMethod.GET)
-    public ResponseEntity<List<User>> getAllUsers() {
-    	ResponseEntity<List<User>> R = new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
+    public ResponseEntity<List<User>> getAllUsers(HttpServletRequest req) {
+    	ResponseEntity<List<User>> R = new ResponseEntity<>(userService.getUsers((int)req.getSession().getAttribute("id")), HttpStatus.OK);
     	return  R;
     }
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
@@ -42,6 +42,10 @@ public class UserController {
     @GetMapping("/username/{username}")
     public ResponseEntity<User> getUserByUsername(@PathVariable String username){
     	return new ResponseEntity<>(userService.getUserByName(username),HttpStatus.OK);
+    }
+    @GetMapping("/this")
+    public ResponseEntity<User> getThisUser(HttpServletRequest req){
+    	return new ResponseEntity<>(userService.getUserById(req, (int)req.getSession(false).getAttribute("id")),HttpStatus.OK);
     }
     @PostMapping("/new")
     public ResponseEntity<String> addUser(@RequestBody User u) throws IOException{

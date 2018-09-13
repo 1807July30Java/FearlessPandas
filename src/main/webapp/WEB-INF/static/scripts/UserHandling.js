@@ -38,11 +38,13 @@ function User(username,password,fname,lname,email,payEmail,address,birthdate){
 function userLogin(){
 	var u  = document.getElementById("username");
 	var p = documenet.getElementById("password");
-	var credentials = {"username":u.innerText,"pass":p.innerText};
+	var credentials = {"username":u.value,"pass":p.value};
 	console.log(credentials);
-	AjaxPost("/Book/login",JSON.stringify(credentials),function(xhr){});
+	AjaxPost("login",JSON.stringify(credentials),function(xhr){});
 }
-
+function userLogout(){
+	AjaxGet("logout",function(xhr){console.log(xhr.responseText);});
+}
 /* 
  * 
  * 

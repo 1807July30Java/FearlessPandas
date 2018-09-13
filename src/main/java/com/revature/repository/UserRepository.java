@@ -31,11 +31,11 @@ public class UserRepository {
     	q.setInteger("uid", id);
     	return (User) q.uniqueResult();
     }
-    public User getUserByLogin(String username, String password) {
+    public User getUserByLogin(String username, int password) {
     	Session s = sessionFactory.getCurrentSession();
     	Query q = s.getNamedQuery("getUserByLogin");
     	q.setString("username",username);
-    	q.setInteger("password", password.hashCode());
+    	q.setInteger("password", password);
     	return (User) q.uniqueResult();
     }
     public User getUserByName(String username) {

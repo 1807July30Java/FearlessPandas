@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 //https://www.youtube.com/watch?v=poc5dyImbig
 //Switch to https in security.xml
 @RestController("logoutController")
-@RequestMapping("/Logout")
+@RequestMapping("/logout")
 public class LogoutController {
 	@RequestMapping(method=RequestMethod.GET)
     public ResponseEntity<String> logout(HttpServletRequest req,HttpServletResponse res) {
@@ -28,6 +28,6 @@ public class LogoutController {
 			req.getSession(false).setAttribute("id", 0);
 			req.getSession(false).invalidate(); 
 		}	
-      return new ResponseEntity<>("LogoutPage",HttpStatus.OK);
+      return new ResponseEntity<>("Successfully Logged out",HttpStatus.OK);
     }
 }

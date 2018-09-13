@@ -26,13 +26,14 @@ public class ResourceController {
     		return "forward:/static/views/profile.html";
     	}else {
     		 try {
+				System.out.println("tried to redirect");
 				res.sendRedirect("login");
-				return "";
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				return "";
 			}
+    		return "forward:/static/views/login.html";
     	}
     }
 

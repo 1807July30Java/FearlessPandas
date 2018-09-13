@@ -1,9 +1,11 @@
 package com.revature.controller;
 
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +24,21 @@ public class LogoutController {
 	@RequestMapping(method=RequestMethod.GET)
     public ResponseEntity<String> logout(HttpServletRequest req,HttpServletResponse res) {
 		System.out.println("logging out");
+		
 		//Authentication auth =  SecurityContextHolder.getContext().getAuthentication();
-		if(true) {
+		HttpSession session = req.getSession(false);
+		if(session != null) {
 			//new SecurityContextLogoutHandler().logout(req, res,auth);
-			req.getSession(false).setAttribute("id", 0);
-			req.getSession(false).invalidate(); 
+			session.setAttribute("id", 0);
+			session.invalidate(); 
+			
 		}	
+		try {
+			res.sendRedirect("login");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
       return new ResponseEntity<>("Successfully Logged out",HttpStatus.OK);
     }
 }

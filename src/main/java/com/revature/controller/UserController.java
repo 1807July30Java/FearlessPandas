@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @RestController("userController")
@@ -44,8 +45,18 @@ public class UserController {
     	return new ResponseEntity<>(userService.getUserByName(username),HttpStatus.OK);
     }
     @GetMapping("/this")
-    public ResponseEntity<User> getThisUser(HttpServletRequest req){
-    	return new ResponseEntity<>(userService.getUserById(req, (int)req.getSession(false).getAttribute("id")),HttpStatus.OK);
+    public ResponseEntity<User> getThisUser(HttpServletRequest req, HttpServletResponse res){
+        HttpSession ses = req.getSession(false);
+        if(ses!= null && ses.getAttribute("id")!= null) {
+        return new ResponseEntity<>(userService.getUserById(req, (int)req.getSession(false).getAttribute("id")),HttpStatus.OK);
+        }else {
+            try {
+                res.sendRedirect("login");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
     @PostMapping("/new")
     public ResponseEntity<String> addUser(@RequestBody User u) throws IOException{

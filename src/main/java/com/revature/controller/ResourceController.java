@@ -20,6 +20,6 @@ public class ResourceController {
 
     @GetMapping("/profileJS")
     public String getProfileJS() {
-        return "forward:/static/js/profile.js";
+        return "forward:static/js/profile.js";
     }
 }

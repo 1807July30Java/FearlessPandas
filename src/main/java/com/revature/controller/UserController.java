@@ -1,5 +1,6 @@
 package com.revature.controller;
 import com.revature.beans.Credentials;
+import com.revature.beans.UpdateInfo;
 import com.revature.domain.User;
 
 
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @RestController("userController")
 @RequestMapping("/user")
@@ -71,5 +73,36 @@ public class UserController {
     	}
     	return null;
     }
+    
+    @PostMapping("/updateInfo")
+    public ResponseEntity<User> updateUser(HttpServletRequest req, @RequestBody UpdateInfo info){
+    	HttpSession ses = req.getSession(false);
+    	if(ses!= null && ses.getAttribute("id")!=null) {	
+    	int userId = (int) ses.getAttribute("id");
+    	String username = info.getUsername();
+    	String fName = info.getFirstName();
+    	String lName = info.getLastName();
+    
+    	
+    	return new ResponseEntity<User>(userService.updateUser(username, fName, lName, userId), HttpStatus.OK);
+    	}else {
+    		System.out.println("failed");
+    		return null;
+    	}
+    }
+    
+    public ResponseEntity<User> updatePassword(HttpServletRequest req, @RequestBody UpdateInfo info){
+    	HttpSession ses = req.getSession(false);
+    	if(ses!= null && ses.getAttribute("id")!= null) {
+    		String oldPassword = info.getOldPassword();
+    		String newPassword = info.getNewPassword();
+    		int userId = (int) ses.getAttribute("id");
+    		return new ResponseEntity<User>(userService.updatePassword(oldPassword, newPassword, userId),HttpStatus.OK);
+    	}else {
+    		System.out.println("failed");
+    		return null;
+    	}
+    }
+   
 
 }

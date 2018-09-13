@@ -54,4 +54,36 @@ public class UserRepository {
         s.save(user);
         return user;
     }
-}
+    public User updateUser(String username, String fName, String lName, int userId) {
+    	Session s = sessionFactory.getCurrentSession();
+    	
+    	User user = (User) s.get(User.class, userId);
+    	
+    	if(fName != null) {
+    		user.setfName(fName);
+    	}
+    		
+    	if(lName != null) {
+    		user.setlName(lName);
+    	}
+    		
+    	if(username!=null) {
+    		user.setUsername(username);
+    	}
+    	s.merge(user);
+    	return user;
+    	
+    }
+    
+    public User updatePassword(String oldPassword, String newPassword, int userId) {
+    	Session s = sessionFactory.getCurrentSession();
+    	User user = (User) s.get(User.class, userId);
+    	if(oldPassword.hashCode()==user.getPassword()) {
+    		user.setPassword(newPassword);
+    	}
+    	s.merge(user);
+    	return user;
+    }
+    
+    
+    }

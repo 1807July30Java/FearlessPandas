@@ -28,6 +28,7 @@ public class LoginController {
 		return "forward:/static/Login.html";
 	}
 	 @PostMapping
+	 @ResponseBody
 	    public ResponseEntity<String> loginUser(HttpServletRequest req, @RequestBody Credentials credentials){
 		 System.out.println("Logging in");
 	    	try {

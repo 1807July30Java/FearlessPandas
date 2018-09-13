@@ -55,21 +55,5 @@ public class UserController {
     		return new ResponseEntity<>("Failed to create user",HttpStatus.BAD_REQUEST);	
     	}
     }
-    @PostMapping("/login")
-    public ResponseEntity<String> loginUser(HttpServletRequest req, @RequestBody Credentials credentials){
-    	try {
-    		User u = userService.getUserByLogin(credentials.getUsername(),credentials.getPass());
-    		if(u != null) {
-    			req.getSession(true).setAttribute("id", u.getUserId());
-    			return new ResponseEntity<>("Successfully logged in as" + u.getUsername(),HttpStatus.OK);
-    		}else {
-    			return new ResponseEntity<>("Username or Password are incorrect",HttpStatus.OK);
-    		}
-    		
-    	}catch 	(Exception e) {
-    		e.printStackTrace();
-    	}
-    	return null;
-    }
-
+   
 }

@@ -34,8 +34,8 @@ public class UserController {
     	return  R;
     }
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
-    public ResponseEntity<User> getUserById(@PathVariable int id){
-    	return 	new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);  
+    public ResponseEntity<User> getUserById(HttpServletRequest req, @PathVariable int id){
+    	return new ResponseEntity<>(userService.getUserById(req, id), HttpStatus.OK);
     }
     @GetMapping("/username/{username}")
     public ResponseEntity<User> getUserByUsername(@PathVariable String username){

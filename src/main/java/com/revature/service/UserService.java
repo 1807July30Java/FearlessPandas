@@ -5,6 +5,7 @@ import com.revature.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Service(value = "userService")
@@ -16,14 +17,18 @@ public class UserService {
     public List<User> getUsers() {
         return userRepository.getUsers();
     }
-    public User getUserById(int id) {
+
+    public User getUserById(HttpServletRequest req, int id) {
     	User u = userRepository.getUserById(id);
-    	u.setPassword("");
-    	u.setAddresses(null);
-    	u.setEmail("");
-    	u.setlName("");
-    	u.setfName("");
-    	u.setPayEmail("");
+    	int temp = (int) req.getSession(false).getAttribute("id");
+    	if(temp != u.getUserId()) {
+			u.setPassword("");
+			u.setAddresses(null);
+			u.setEmail("");
+			u.setlName("");
+			u.setfName("");
+			u.setPayEmail("");
+		}
     	return u;
     }
     public User getUserByLogin(String username, String password) {

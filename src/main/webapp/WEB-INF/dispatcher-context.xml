@@ -21,7 +21,7 @@
 			<value>/WEB-INF/pages/</value>
 		</property>
 		<property name="suffix">
-			<value>.jsp</value> <!-- JSPs are one of MANY server-side templating tools -->
+			<value>.html</value> <!-- JSPs are one of MANY server-side templating tools -->
 		</property>
 	</bean>
 

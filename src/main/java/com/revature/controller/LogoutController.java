@@ -22,9 +22,9 @@ public class LogoutController {
 	@RequestMapping(method=RequestMethod.GET)
     public ResponseEntity<String> logout(HttpServletRequest req,HttpServletResponse res) {
 		System.out.println("logging out");
-		Authentication auth =  SecurityContextHolder.getContext().getAuthentication();
-		if(auth != null) {
-			new SecurityContextLogoutHandler().logout(req, res,auth);
+		//Authentication auth =  SecurityContextHolder.getContext().getAuthentication();
+		if(true) {
+			//new SecurityContextLogoutHandler().logout(req, res,auth);
 			req.getSession(false).setAttribute("id", 0);
 			req.getSession(false).invalidate(); 
 		}	

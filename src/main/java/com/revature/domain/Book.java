@@ -152,6 +152,11 @@ public class Book {
     public void setIsbn(int isbn) {
         this.isbn = isbn;
     }
+    
+    
+    public void addToGenre(Genre g) {
+		this.genres.add(g);
+	}
 
 
 }

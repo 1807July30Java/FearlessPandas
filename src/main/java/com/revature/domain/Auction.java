@@ -130,7 +130,8 @@ public class Auction {
     }
 /*********************************************************************************/
     public boolean isClosed() {
-    	return  this.endDate.getTime() < System.currentTimeMillis();
+    	Long a = (System.currentTimeMillis() - this.endDate.getTime());
+    	return a > 0; 
     }
     
 	@Override

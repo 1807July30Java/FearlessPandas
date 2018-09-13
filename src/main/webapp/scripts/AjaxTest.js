@@ -48,7 +48,8 @@ function makeBook(title, author, publisher, condition) {
     b.publisher = publisher;
     b.description = "a book";
     b.condition = {"name": condition};
-    b.Genres = [{"name": "Genre a"}, {"name": "Genre b"}];
+    b.genres = [{"name": "Comedy"}, {"name": "Tragedy"}];
+    console.log("genres" + b.genres);
     return b;
 
 }
@@ -67,6 +68,7 @@ function makeAuctions(u) {
             "endDate": end
         });
     }
+    console.log(auctions);
     return auctions;
 }
 
@@ -74,7 +76,7 @@ makeUser("Landon", "pass");
 makeUser("Jeremy", "pass");
 makeUser("Omar", "pass");
 makeUser("Alpha", "pass");
-var genres = [{"name": "Russian Existentialism"}, {"name": "Romance"}];
+var genres = [{"name": "Russian Existentialism"}, {"name": "Comedy"}];
 var condition = {"name": "VeryGood"};
 var im = {"boodId": 1, "imageBlob": null};
 AjaxGet("/BookAuction/image/book/1", function (xhr) {

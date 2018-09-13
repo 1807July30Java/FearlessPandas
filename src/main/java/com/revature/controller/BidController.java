@@ -29,7 +29,7 @@ public class BidController {
 		try {
 			if(session != null) {
 				int id = (int) session.getAttribute("id");
-				User u = userService.getUserById(id);
+				User u = userService.getUserById(req, id);
 				b.setUser(u);
 				bidService.addBidToAuction(b);
 				return new ResponseEntity<>("Placed new bid",HttpStatus.OK);

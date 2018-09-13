@@ -4,23 +4,22 @@ function AjaxPost(url,body, func){
 	    if(this.readyState==4 && this.status == 200){
 	      func(this);
 	    }
-	  }
+	  };
 	  xhr.open("POST",url,true);
 	  xhr.setRequestHeader("Accept","application/json");
 	  xhr.setRequestHeader("Content-Type","application/json");
 	  xhr.send(body);
-	};
-	
-	function AjaxGet(url, func){
+}
+function AjaxGet(url, func){
 		  var xhr = new XMLHttpRequest();
 		  xhr.onreadystatechange = function (){
 		    if(this.readyState==4 && this.status == 200){
 		      func(this);
 		    }
-		  }
+		  };
 		  xhr.open("GET",url,true);
 		  xhr.send();
-		};   
+    }
 function User(username,password,fname,lname,email,payEmail,address,birthdate){
 	var u = {};
 	u.username = username;

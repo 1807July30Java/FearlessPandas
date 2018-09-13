@@ -40,7 +40,7 @@ public class UserController {
     	return new ResponseEntity<>(userService.getUserByName(username),HttpStatus.OK);
     }
     @PostMapping("/new")
-    public ResponseEntity<String> addUser(@RequestBody User u) throws IOException{
+    public ResponseEntity<String> addUser(@RequestBody User u) {
     	try {
     		if(userService.getUserByName(u.getUsername()) == null) {
     			userService.addUser(u);

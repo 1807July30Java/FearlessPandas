@@ -13,7 +13,7 @@ public class BookConditionService {
 	BookConditionRepository bookConditionRepository;
 	
 	public BookCondition getBookConditionById(int conditionId) {
-		return (BookCondition) bookConditionRepository.getConditionByBookId(conditionId);
+		return bookConditionRepository.getConditionByBookId(conditionId);
 	}
 
 }

@@ -57,7 +57,6 @@ public class AuctionRepository {
 			Query Q = s.getNamedQuery("getConditionByName");
 			Q.setString("name",BC.getName());
 			List<BookCondition> pBC = Q.list();
-			a.getBook().setCondition(null);
 			if( pBC.size()>0) {
 				a.getBook().setCondition(pBC.get(0));
 			}

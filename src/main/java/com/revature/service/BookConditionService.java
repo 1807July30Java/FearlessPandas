@@ -1,5 +1,7 @@
 package com.revature.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,9 @@ public class BookConditionService {
 	
 	public BookCondition getBookConditionById(int conditionId) {
 		return (BookCondition) bookConditionRepository.getConditionByBookId(conditionId);
+	}
+	public List<BookCondition> getAllConditions(){
+		return bookConditionRepository.getAllConditions();
 	}
 
 }

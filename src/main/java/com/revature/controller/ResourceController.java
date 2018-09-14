@@ -46,6 +46,10 @@ public class ResourceController {
     public String getAuctions() {
         return "forward:/static/views/auctions.html";
     }
+    @GetMapping("/newAuction")
+	public String newAuctionPage(HttpServletRequest req) {
+		return "forward:/static/views/newAuction.html";
+	}
 
     @GetMapping("/auctionsJS")
     public String getAuctionsJS() {

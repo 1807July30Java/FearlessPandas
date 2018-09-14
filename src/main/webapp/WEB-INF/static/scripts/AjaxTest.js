@@ -49,7 +49,6 @@ function makeBook(title, author, publisher, condition) {
     b.description = "a book";
     b.condition = {"name": condition};
     b.genres = [{"name": "Comedy"}, {"name": "Tragedy"}];
-    console.log("genres" + b.genres);
     return b;
 
 }
@@ -83,7 +82,7 @@ AjaxGet("/BookAuction/image/book/1", function (xhr) {
     im = xhr.responseText;
 });
 var u = {};
-AjaxGet("/BookAuction/user/username/OPpandas", function (xhr) {
+AjaxGet("/BookAuction/user/username/Landon", function (xhr) {
     u = JSON.parse(xhr.responseText);
 });
 

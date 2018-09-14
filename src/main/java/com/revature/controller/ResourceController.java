@@ -46,6 +46,7 @@ public class ResourceController {
     public String getAuctions() {
         return "forward:/static/views/auctions.html";
     }
+
     @GetMapping("/update")
     public String getUpdate() {
     	return "forward:/static/views/updateInfo.html";
@@ -54,6 +55,7 @@ public class ResourceController {
     public String getPassUpdate() {
     	return "forward:/static/views/updatePass.html";
     }
+
 
     @GetMapping("/auctionsJS")
     public String getAuctionsJS() {

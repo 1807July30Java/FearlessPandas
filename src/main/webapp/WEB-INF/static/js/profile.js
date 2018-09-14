@@ -15,12 +15,15 @@ function populateUser(xhr) {
         // console.log(res);
         // console.log(res.fName);
         if (res.fName) {
-            console.log(res.fName);
-            document.getElementById("firstName").innerText =
-                res.fName;
-            document.getElementById("lastName").innerText =
-                res.lName;
-        }
+
+        	console.log(res.fName);
+			document.getElementById("firstName").innerText = 
+					 res.fName;}
+        if (res.lName) {
+        	console.log(res.fName);
+        	document.getElementById("lastName").innerText = 
+        		res.lName;}
+
         if (res.username) {
             console.log(res.username);
             document.getElementById("username").innerText =

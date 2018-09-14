@@ -75,37 +75,44 @@ public class UserController {
 
  
     @PostMapping("/updateInfo")
-    public ResponseEntity<User> updateUser(HttpServletRequest req, @RequestBody UpdateInfo info){
+    public String updateUser(HttpServletRequest req, @RequestBody UpdateInfo info){
     	HttpSession ses = req.getSession(false);
     	if(ses!= null && ses.getAttribute("id")!=null) {	
     	int userId = (int) ses.getAttribute("id");
     	String username = info.getUsername();
     	String fName = info.getFirstName();
     	String lName = info.getLastName();
-    
+    	if( new ResponseEntity<User>(userService.updateUser(username, fName, lName, userId), HttpStatus.OK)!=null) {
+    		return "/profile";
+    	}else {
+    		return "/update";
+    	}
     	
-    	return new ResponseEntity<User>(userService.updateUser(username, fName, lName, userId), HttpStatus.OK);
+    	
     	}else {
     		System.out.println("failed");
-    		return null;
+    		return "/login";
     	}
     }
-    
-    public ResponseEntity<User> updatePassword(HttpServletRequest req, @RequestBody UpdateInfo info){
+    @PostMapping("/updatePass")
+    public String updatePassword(HttpServletRequest req, @RequestBody UpdateInfo info){
     	HttpSession ses = req.getSession(false);
     	
-    	User authenticatedU = userService.getUserByLogin(info.getUsername(), info.getOldPassword());
-    	if(ses!= null && authenticatedU!= null) {
+    	
+    	if(ses!= null && ses.getAttribute("id")!= null) {
     		String oldPassword = info.getOldPassword();
     		String newPassword = info.getNewPassword();
+    		System.out.println(oldPassword + "***********"+ newPassword);
     		int id = (int) ses.getAttribute("id");
-    		return new ResponseEntity<User>(userService.updatePassword(oldPassword, newPassword, id),HttpStatus.OK);
+    		if(new ResponseEntity<User>(userService.updatePassword(oldPassword, newPassword, id),HttpStatus.OK)!=null) {
+    			return "/login";
+    		}
+    			return "/updatePass";
     	}else {
     		System.out.println("failed");
-    		return null;
+    		return "/login";
     	}
     }
-   
 
 
    

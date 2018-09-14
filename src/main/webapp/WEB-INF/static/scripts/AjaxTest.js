@@ -57,7 +57,7 @@ function makeAuctions(u) {
     var auctions = [];
     console.log("Auction owner:" + JSON.stringify(u));
     var end =  new Date().setMonth(10);
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 2; i++) {
         auctions.push({
             "user": u,
             "book": makeBook("title" + i, "author" + i, "publisher" + i, "GOOD"),

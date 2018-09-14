@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.domain.Auction;
+import com.revature.domain.User;
 import com.revature.service.AuctionService;
+import com.revature.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,6 +26,8 @@ import javax.servlet.http.HttpServletRequest;
 public class AuctionController {
 	@Autowired
 	AuctionService auctionService;
+	@Autowired
+	UserService userService;
 	@GetMapping("/{id}")
 	@ResponseBody
 	public ResponseEntity<Auction> getAuctionById(@PathVariable int id){
@@ -47,9 +51,11 @@ public class AuctionController {
 	
 	@PostMapping("/new")
 	@ResponseBody
-	public ResponseEntity<String> newAuction(@RequestBody Auction A){
-		System.out.println(A.getCreateDate());
+	public ResponseEntity<String> newAuction(HttpServletRequest req,@RequestBody Auction A){
 		try {
+			int id = (int) req.getSession().getAttribute("id");
+			User u = userService.getUserById(req, id);
+			A.setUser(u);
 			auctionService.saveAuction(A);
 			return new ResponseEntity<>("Successfully created new Auction",HttpStatus.OK);
 		}catch(Exception e) {

@@ -9,7 +9,7 @@ import java.sql.Date;
 @NamedQueries({
         @NamedQuery(name = "getAllAuctions", query = "from Auction"),
         @NamedQuery(name = "getAllAuctionsBefore", query = "from Auction where endDate < :end_date"),
-        @NamedQuery(name = "getUserAuctions", query = "from Auction where user.userId is :userId")
+        @NamedQuery(name = "getUserAuctions", query = "from Auction where user.userId is :userId order by createDate desc")
 })
 @Entity
 @Table(name = "AUCTION")
@@ -27,9 +27,9 @@ public class Auction {
     @Column(name = "END_DATE")
     private Date endDate;
     @Column(name = "MINIMUM_PRICE")
-    private int minimumPrice;
+    private double minimumPrice;
     @Column(name = "BUY_IT_NOW")
-    private int buyItNow;
+    private double buyItNow;
     @Column(name = "ISCLOSED")
     private boolean isClosed;
     /*********************************************************************************/
@@ -79,19 +79,19 @@ public class Auction {
         this.endDate = endDate;
     }
 
-    public int getMinimumPrice() {
+    public double getMinimumPrice() {
         return minimumPrice;
     }
 
-    public void setMinimumPrice(int minimumPrice) {
+    public void setMinimumPrice(double minimumPrice) {
         this.minimumPrice = minimumPrice;
     }
 
-    public int getBuyItNow() {
+    public double getBuyItNow() {
         return buyItNow;
     }
 
-    public void setBuyItNow(int buyItNow) {
+    public void setBuyItNow(double buyItNow) {
         this.buyItNow = buyItNow;
     }
 

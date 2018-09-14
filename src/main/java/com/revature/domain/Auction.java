@@ -114,7 +114,8 @@ public class Auction {
     /*********************************************************************************/
     public boolean isClosed() {
         Long a = (System.currentTimeMillis() - this.endDate.getTime());
-        return a > 0;
+        System.out.println("Auction is closed?" + a + " end date " + this.endDate.getTime());
+        return a > 15000000 ;
     }
 
     public void setClosed(boolean isClosed) {

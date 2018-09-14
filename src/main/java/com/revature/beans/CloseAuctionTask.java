@@ -7,9 +7,10 @@ import com.revature.repository.AuctionRepository;
 public class CloseAuctionTask implements Runnable {
 	@Autowired
 	private AuctionRepository auctionRepository;
+	
     private Auction auction;
 
-    public CloseAuctionTask(Auction auction) {
+    public CloseAuctionTask(Auction auction ){
       this.auction = auction;
     }
     public Auction getAuction() {
@@ -17,7 +18,11 @@ public class CloseAuctionTask implements Runnable {
     }
     public void run() {
     	System.out.println("trying to close");
+    	System.out.println(auctionRepository == null);
+
+    	System.out.println(auction == null);
       auctionRepository.setClosed(auction);
+      
     }
 
   }

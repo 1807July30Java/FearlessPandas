@@ -48,6 +48,8 @@
   		<property name="maxPoolSize" value="10" />
   		<property name="queueCapacity" value="25" />
 	</bean>
+	<bean id="scheduler" class="org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler">
+	</bean>
 
 	<!-- <bean id="closeAuctionTask" class="com.revature.beans.CloseAuctionTask">
   		<constructor-arg ref="taskExecutor" />

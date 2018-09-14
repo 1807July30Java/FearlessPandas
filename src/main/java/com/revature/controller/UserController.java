@@ -100,24 +100,36 @@ public class UserController {
     }
 
     @PostMapping("/updatePass")
-    public String updatePassword(HttpServletRequest req, @RequestBody UpdateInfo info) {
-        HttpSession ses = req.getSession(false);
 
+    public String updatePassword(HttpServletRequest req, @RequestBody UpdateInfo info){
+    	HttpSession ses = req.getSession(false);
+    	if(ses!= null && ses.getAttribute("id")!= null) {
+    		User u = userService.getUserById(req, (int)ses.getAttribute("id"));
+        	User authenticatedUser = userService.getUserByLogin(u.getUsername(),info.getOldPassword());
+        	if(authenticatedUser != null) {
+	    		String oldPassword = info.getOldPassword();
+	    		String newPassword = info.getNewPassword();
+	    		System.out.println(oldPassword + "***********"+ newPassword);
+	    		int id = (int) ses.getAttribute("id");
+	    		
+    		//System.out.println("************************************************** uSerr "+userService.updatePassword(oldPassword, newPassword, id));
+    		
+    			new ResponseEntity<>(userService.updatePassword(oldPassword, newPassword, id),HttpStatus.OK);
+    			
+    			ses.invalidate();
+    			
+    			return "/login";
+    		}else {
+    			return "/updatePass";
+    		}
+        	
+    	
+    }else {
+		
+		return "/login";
+	}
 
-        if (ses != null && ses.getAttribute("id") != null) {
-            String oldPassword = info.getOldPassword();
-            String newPassword = info.getNewPassword();
-            System.out.println(oldPassword + "***********" + newPassword);
-            int id = (int) ses.getAttribute("id");
-            if (new ResponseEntity<User>(userService.updatePassword(oldPassword, newPassword, id), HttpStatus.OK) != null) {
-                return "/login";
-            }
-            return "/updatePass";
-        } else {
-            System.out.println("failed");
-            return "/login";
-        }
     }
-
+   
 
 }

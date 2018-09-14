@@ -77,12 +77,11 @@ public class UserRepository {
     
     public User updatePassword(String oldPassword, String newPassword, int userId) {
     	Session s = sessionFactory.getCurrentSession();
-    	User user = (User) s.get(User.class, userId);
-    	if(oldPassword.hashCode()==user.getPassword()) {
-    		user.setPassword(newPassword);
-    	}
-    	s.merge(user);
-    	return user;
+    	User u = (User) s.get(User.class, userId);
+    	u.setPassword(newPassword);
+    	s.saveOrUpdate(u);
+        return u;
+    	
     }
     
     

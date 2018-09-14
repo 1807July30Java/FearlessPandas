@@ -69,6 +69,7 @@ public class UserService {
     }
     
     public User updatePassword(String oldPassword, String newPassword, int userId) {
+    	System.out.println("**************************************************ServicePa "+userRepository.updatePassword(oldPassword, newPassword, userId));
     	return userRepository.updatePassword(oldPassword, newPassword, userId);
     }
 }

@@ -73,14 +73,14 @@ function AjaxPost(url,body, func){
                     <form class="form-signin" action="user/updatePass" method="post" enctype="application/json">
                         
                         <div class="form-label-group">
-                            <input type="password" id="oldPassword" class="form-control" placeholder="Old Password"
+                            <input type="password" id="oldPassword" class="form-control" placeholder="Old Password" 
                                    required autofocus name="oldPassword">
-                            <label >Old Password</label>
+                            <label for="oldPassword">Old Password</label>
                         </div>
                         <div class="form-label-group">
                             <input type="password" id="newPassword" class="form-control" placeholder="New Password"
                                    required name="newPassword">
-                            <label >New Password</label>
+                            <label for="newPassword">New Password</label>
                         </div>
                         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" onclick="passUpdate()">Update!</button>
                         <hr class="my-4">

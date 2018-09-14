@@ -17,7 +17,11 @@ function populateUser(xhr) {
         if (res.fName) {
         	console.log(res.fName);
 			document.getElementById("firstName").innerText = 
-					 res.firstName;}
+					 res.fName;}
+        if (res.lName) {
+        	console.log(res.fName);
+        	document.getElementById("lastName").innerText = 
+        		res.lName;}
         if (res.username) {
         	console.log(res.username);
         	document.getElementById("username").innerText = 

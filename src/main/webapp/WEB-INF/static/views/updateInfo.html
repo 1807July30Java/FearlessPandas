@@ -7,42 +7,45 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="style">
 
-    <script rel = "text/javascript">
-function AjaxPost(url,body, func){
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function (){
-        if(this.readyState==4 && this.status == 200){
-          func(this);
+    <script rel="text/javascript">
+        function AjaxPost(url, body, func) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    func(this);
+                }
+            }
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(body);
+        };
+
+        function userUpdate() {
+
+            var u = document.getElementById("username");
+            var f = document.getElementById("firstName");
+            var l = document.getElementById("lastName");
+            var info = {"username": u.value, "firstName": f.value, "lastName": l.value};
+            console.log(info);
+            AjaxPost("user/updateInfo", JSON.stringify(info), function (xhr) {
+                console.log(xhr.responseText);
+                window.location.pathname = window.location.pathname.replace("/update", xhr.responseText);
+            });
         }
-      }
-      xhr.open("POST",url,true);
-      xhr.setRequestHeader("Accept","application/json");
-      xhr.setRequestHeader("Content-Type","application/json");
-      xhr.send(body);
-    };
-    
-    function userUpdate(){
-        
-        var u  = document.getElementById("username");
-        var f = document.getElementById("firstName");
-        var l = document.getElementById("lastName");
-        var info = {"username":u.value,"firstName":f.value, "lastName": l.value};
-        console.log(info);
-        AjaxPost("user/updateInfo",JSON.stringify(info),function(xhr){  
-            console.log(xhr.responseText);
-            window.location.pathname = window.location.pathname.replace("/update",xhr.responseText);});
-    }
-    function passUpdate(){
-        var p1  = document.getElementById("oldPassword");
-        var p2 = document.getElementById("newPassword");  
-        var info = {"oldPassword":p1.value,"newPassword":p2.value};
-        console.log(info);
-        AjaxPost("user/updatePassword",JSON.stringify(info),function(xhr){ 
-            window.location.pathname = window.location.pathname.replace("/updateInfo",xhr.responseText);});
-       
-    }
-</script>
-<title>Update</title>
+
+        function passUpdate() {
+            var p1 = document.getElementById("oldPassword");
+            var p2 = document.getElementById("newPassword");
+            var info = {"oldPassword": p1.value, "newPassword": p2.value};
+            console.log(info);
+            AjaxPost("user/updatePassword", JSON.stringify(info), function (xhr) {
+                window.location.pathname = window.location.pathname.replace("/updateInfo", xhr.responseText);
+            });
+
+        }
+    </script>
+    <title>Update</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -74,20 +77,22 @@ function AjaxPost(url,body, func){
                         <div class="form-label-group">
                             <input type="text" id="username" class="form-control" placeholder="Username" required
                                    autofocus name="username">
-                            <label for="inputUsername">Username</label>
+                            <label for="username">Username</label>
                         </div>
                         <div class="form-label-group">
                             <input type="text" id="firstName" class="form-control" placeholder="firstName" required
                                    autofocus name="username">
-                            <label for="inputUsername">First Name</label>
+                            <label for="firstName">First Name</label>
                         </div>
 
                         <div class="form-label-group">
                             <input type="text" id="lastName" class="form-control" placeholder="Last Name"
                                    required name="password">
-                            <label for="inputUsername">Last Name</label>
+                            <label for="lastName">Last Name</label>
                         </div>
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" onclick="userUpdate()">Update!</button>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button"
+                                onclick="userUpdate()">Update!
+                        </button>
                         <hr class="my-4">
                     </form>
                 </div>
@@ -101,5 +106,5 @@ function AjaxPost(url,body, func){
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"
         integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl"
         crossorigin="anonymous"></script>
-        <script type="text/javascript" src="updateJS"></script>
+<script type="text/javascript" src="updateJS"></script>
 </html>

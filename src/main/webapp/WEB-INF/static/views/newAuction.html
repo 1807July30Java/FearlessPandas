@@ -3,13 +3,41 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Profile</title>
-       <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <title>New Auction</title>
+       
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="style">
 </head>
-
+<div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/profile">B.A.S.S.</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/auctions">Auctions
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/search">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<br><br><br>
 <div class="container">
     <div class="row">
         <div class="col-sm-12 mx-auto">
@@ -25,16 +53,17 @@
                                 <th scope="col" id = "authorh">Author</th>
                                 <th scope="col" id = "descriptionh">Description</th>
                                 <th scope="col" id = "conditionh">Condition</th>
+                                <th scope="col" id = "genreh">Genre</th>
                                 <th scope="col" id = "publisherh">Publisher</th>
                                 <th scope="col" id = "enddateh">End Date</th>
                                 <th scope="col" id = "binh">Buy it now</th>
-                                <th scope="col" id = "minimumpriceh">minimum price</th>
+                                <th scope="col" id = "minimumpriceh">Minimum Price</th>
                             </tr>
                             
                             </thead>
                             <tr>
                                 <td scope="col" ><input id = "title" type = "text"/></td>
-                                <td scope="col" ><input id = "isbn" type = "text" /></td>
+                                <td scope="col" ><input id = "isbn" type = "number" /></td>
                                 <td scope="col" ><input id = "author" type ="text"/></td>
                                 <td scope="col" ><input id = "description" type = "text"/></td>
                                 <td scope="col" ><select id = "condition"></select></td>
@@ -46,9 +75,10 @@
                             </tr>
                             <tbody id="newAuctionTable"></tbody>
                         </table>
+                        <input type = "button" value = "create auction" onclick = "auctionForm()">	
                     </div>
                 </div>
-            </div>
+            </div>                        
         </div>
     </div>
 </div>
@@ -62,8 +92,8 @@
                 }
             }
             xhr.open("POST",url,true);
-           // xhr.setRequestHeader("Accept","application/json");
-           // xhr.setRequestHeader("Content-Type","application/json");
+            xhr.setRequestHeader("Accept","application/json");
+            xhr.setRequestHeader("Content-Type","application/json");
             xhr.send(body);
         };
 
@@ -74,25 +104,29 @@
             var description = document.getElementById("description");
             var condition  = document.getElementById("condition");
             var publisher = document.getElementById("publisher");
-            var date  = document.getElementById("date");
-            var minimumPrice = document.getElementById("minimumPrice");
-            var buyItNow  = document.getElementById("buyItNow");
-
-            var newAuction = {
+            var date  = document.getElementById("enddate");
+            var minimumPrice = document.getElementById("minimumprice");
+            var buyItNow  = document.getElementById("buyitnow");
+			var newAuction = {
+            	"book":{
                 "title":title.value,
-                "isbn":isbn.value,
+                "isbn":isbn.valueAsNumber,
                 "author":author.value,
                 "description":description.value,
                 "condition":condition.value,
                 "publisher":publisher.value,
-                "date":date.value,
-                "minimumPrice":minimumPrice.value,
-                "buyItNow":buyItNow.value
-                };
-
+                "genres": [{"name":genre.options[genre.selectedIndex].innerText}],
+                "condition":{"name":condition.options[condition.selectedIndex].innerText}
+                },
+	            "createDate":new Date().getTime(),
+	            "endDate":enddate.valueAsNumber,
+	            "user":{},
+	            "minimumPrice":minimumPrice.valueAsNumber,
+	            "buyItNow":buyItNow.valueAsNumber
+				}
             console.log(newAuction);
-            AjaxPost("auction",JSON.stringify(newAuction),function(xhr){
-                window.location.pathname=xhr.responseText;
+            AjaxPost("auction/new",JSON.stringify(newAuction),function(xhr){
+                console.log(xhr.responseText);
                 });
         }
     </script>

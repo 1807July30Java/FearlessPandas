@@ -36,7 +36,23 @@ public class ResourceController {
     		return "forward:/static/views/login.html";
     	}
     }
-
+    @GetMapping("/newAuction")
+    public String newAuction(HttpServletRequest req, HttpServletResponse res) {
+    	HttpSession session = req.getSession(false);
+    	if(session!= null && session.getAttribute("id") != null) {
+    		return "forward:/static/views/newAuction.html";
+    	}else {
+    		 try {
+				System.out.println("tried to redirect");
+				res.sendRedirect("login");
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		return "forward:/static/views/login.html";
+    	}
+    }
     @GetMapping("/profileJS")
     public String getProfileJS() {
         return "forward:static/js/profile.js";

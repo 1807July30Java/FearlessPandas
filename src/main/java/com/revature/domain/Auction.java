@@ -63,14 +63,6 @@ public class Auction {
         this.auctionId = auctionId;
     }
 
-    public Book getBookId() {
-        return book;
-    }
-
-    public void setBookId(Book book) {
-        this.book = book;
-    }
-
     public Date getCreateDate() {
         return createDate;
     }

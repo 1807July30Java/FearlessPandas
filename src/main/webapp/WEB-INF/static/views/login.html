@@ -7,29 +7,29 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="style">
 
-    <script rel = "text/javascript">
-        function AjaxPost(url,body, func){
+    <script rel="text/javascript">
+        function AjaxPost(url, body, func) {
             var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function (){
-                if(this.readyState==4 && this.status == 200){
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
                     func(this);
                 }
             }
-            xhr.open("POST",url,true);
-            xhr.setRequestHeader("Accept","application/json");
-            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
             xhr.send(body);
         };
 
-        function userLogin(){
-            var u  = document.getElementById("inputUsername");
+        function userLogin() {
+            var u = document.getElementById("inputUsername");
             var p = document.getElementById("inputPassword");
-            var credentials = {"username":u.value,"pass":p.value};
+            var credentials = {"username": u.value, "pass": p.value};
             console.log(credentials);
             console.log(window.location.pathname);
-            AjaxPost("login",JSON.stringify(credentials),function(xhr){
-            	
-            	window.location.pathname = window.location.pathname.replace("/login",xhr.responseText);
+            AjaxPost("login", JSON.stringify(credentials), function (xhr) {
+
+                window.location.pathname = window.location.pathname.replace("/login", xhr.responseText);
             });
         }
     </script>
@@ -73,7 +73,9 @@
                                    required name="password">
                             <label for="inputPassword">Password</label>
                         </div>
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" onclick="userLogin()">Sign in</button>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button"
+                                onclick="userLogin()">Sign in
+                        </button>
                         <hr class="my-4">
                     </form>
                 </div>

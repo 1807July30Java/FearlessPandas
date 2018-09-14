@@ -46,7 +46,7 @@ public class AuctionRepository {
 	public List<Auction> getAllUserAuctions(int userId) {
 		Session s = sessionFactory.getCurrentSession();
 		Query q = s.getNamedQuery("getUserAuctions");
-		q.setInteger("user_id", userId);
+		q.setInteger("userId", userId);
 		return q.list();
 	}
 	public Auction saveAuctionWithUserAndBook(Auction a) throws Exception { //Save auction with new book not yet in db

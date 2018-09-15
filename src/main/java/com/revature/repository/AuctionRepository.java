@@ -1,7 +1,6 @@
 package com.revature.repository;
 
 import com.revature.beans.CloseAuctionTask;
-import com.revature.beans.CloseAuctionTaskExecutor;
 import com.revature.domain.Auction;
 import com.revature.domain.Book;
 import com.revature.domain.BookCondition;

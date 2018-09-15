@@ -16,10 +16,8 @@ import java.sql.Date;
         @NamedQuery(name = "getAuctionByBookIdAndMinPrice", query = "from Auction where book.bookId is :bookId and minimumPrice is :minimumPrice"),
         @NamedQuery(name = "getAuctionByBookIdAndBuyNowPrice", query = "from Auction where book.bookId is :bookId and buyItNow is :buyItNow"),
         @NamedQuery(name = "getAuctionByBookIdBuyNowMinPrice", query = "from Auction where book.bookId is :bookId and buyItNow is :buyItNow and minimumPrice is :minimumPrice and endDate <= :endDate"),
-        @NamedQuery(name = "getAuctionByGeneralBook", query = "from Auction where book.bookId is :bookId or buyItNow is :buyItNow or minimumPrice is :minimumPrice or endDate <= :endDate")
+        @NamedQuery(name = "getAuctionByGeneralBook", query = "from Auction where book.bookId is :bookId or buyItNow is :buyItNow or minimumPrice is :minimumPrice or endDate <= :endDate"),
         
-
-       
         @NamedQuery(name = "getUserAuctions", query = "from Auction where user.userId is :userId order by createDate desc")
 
 })

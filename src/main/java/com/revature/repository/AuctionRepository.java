@@ -115,4 +115,43 @@ public class AuctionRepository {
 		a = (Auction)s.get(Auction.class, a.getAuctionId());
 		return a.isClosed();
 	}
+	
+	public List<Auction> getAuctionSearch(int bookId, int minimumPrice, int buyItNow, Date endDate){
+		Session s = sessionFactory.getCurrentSession();
+		
+	
+		
+		if (bookId != 0 && buyItNow != 0 && minimumPrice !=0 && endDate != null) {
+			Query q = s.getNamedQuery("getAuctionByBookIdBuyNowMinPrice");
+			q.setInteger("bookId", bookId);
+			q.setInteger("minimumPrice", minimumPrice);
+			q.setInteger("buyItNow", buyItNow);
+			q.setDate("endDate", endDate);
+			return q.list();
+		}
+		else if (bookId != 0 && buyItNow != 0) {
+			Query q = s.getNamedQuery("getAuctionByBookIdAndBuyNowPrice");
+			q.setInteger("bookId", bookId);
+			q.setInteger("buyItNow", buyItNow);
+			return q.list();
+		}else if(bookId != 0 && minimumPrice!=0) {
+			Query q = s.getNamedQuery("getAuctionByBookIdAndMinPrice");
+			q.setInteger("bookId", bookId);
+			q.setInteger("minimumPrice", minimumPrice);
+			return q.list();
+		}else {
+			
+			System.out.println("***********************************************************auctionRepo"+ bookId);
+			
+			Query q = s.getNamedQuery("getAuctionByGeneralBook");
+			q.setInteger("bookId", bookId);
+			q.setInteger("minimumPrice", minimumPrice);
+			q.setInteger("buyItNow", buyItNow);
+			q.setDate("endDate", endDate);
+			return q.list();
+		}
+		
+		
+	}
+	
 }

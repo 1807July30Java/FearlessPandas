@@ -203,12 +203,9 @@ public class AuctionRepository {
 			return q.list();
 		}else {
 			
-			System.out.println("***********************************************************auctionRepo"+ bookId);
+
 			Query q = s.getNamedQuery("getAuctionByGeneralBook");
 			q.setInteger("bookId", bookId);
-			q.setInteger("minimumPrice", minimumPrice);
-			q.setInteger("buyItNow", buyItNow);
-			q.setDate("endDate", endDate);
 			return q.list();
 		}
 		

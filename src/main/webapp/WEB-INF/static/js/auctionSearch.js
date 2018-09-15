@@ -79,6 +79,9 @@ function makeModal(xhr) {
     }
     sendAjaxGet("auction/bids/" + res.auctionId, setBid);
     document.getElementById("currentBid").className = res.auctionId;
+    if (res.isClosed === 0) {
+        document.getElementById("bidSection").style.display = "block";
+    }
 }
 
 function populate(xhr) {

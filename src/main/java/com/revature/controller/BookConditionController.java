@@ -22,7 +22,11 @@ public class BookConditionController {
 	private BookConditionService bookConditionService;
 	@RequestMapping(value = "/{id}", method=RequestMethod.GET)
 	public ResponseEntity<BookCondition> getBookCondition(@PathVariable int id){
-		return new ResponseEntity<>(bookConditionService.getBookConditionById(id),HttpStatus.OK);
+		try {
+			return new ResponseEntity<>(bookConditionService.getBookConditionById(id),HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(null,HttpStatus.OK);
+		}
 	}
 	@GetMapping("/all")
 	public ResponseEntity<List<BookCondition>> getAllConditions(){

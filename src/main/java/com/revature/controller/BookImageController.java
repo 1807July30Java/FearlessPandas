@@ -21,7 +21,11 @@ public class BookImageController {
 	private BookImageService bookImageService;
 	@GetMapping("/{imageId}")
 	public ResponseEntity<BookImage> getBookImageById(@PathVariable int imageId){
-		return new ResponseEntity<>(bookImageService.getBookImageById(imageId), HttpStatus.OK);
+		try {
+			return new ResponseEntity<>(bookImageService.getBookImageById(imageId), HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(bookImageService.getBookImageById(imageId), HttpStatus.OK);
+		}
 	}
 	@GetMapping("/book/{id}")
 	public ResponseEntity<List<BookImage>> getBookImageByBookId(@PathVariable int id){

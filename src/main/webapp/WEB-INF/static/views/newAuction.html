@@ -118,7 +118,7 @@
         var description = document.getElementById("description");
         var condition = document.getElementById("condition");
         var publisher = document.getElementById("publisher");
-        var enddate = document.getElementById("enddate");
+        var enddate = new Date(document.getElementById("enddate").valueAsNumber);
         var minimumPrice = document.getElementById("minimumprice");
         var buyItNow = document.getElementById("buyitnow");
         var newAuction = {
@@ -132,7 +132,7 @@
                 "condition": {"name": condition.options[condition.selectedIndex].innerText}
             },
             "createDate": new Date().getTime(),
-            "endDate": new Date(enddate.value).getTime(),
+            "endDate": new Date(enddate.getUTCFullYear(),enddate.getUTCMonth(),enddate.getUTCDate(),enddate.getUTCHours(),enddate.getUTCMinutes(),enddate.getUTCSeconds(),enddate.getUTCMilliseconds()),
             "user": {},
             "minimumPrice": minimumPrice.valueAsNumber,
             "buyItNow": buyItNow.valueAsNumber

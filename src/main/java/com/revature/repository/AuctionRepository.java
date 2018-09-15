@@ -106,7 +106,7 @@ public class AuctionRepository {
         a.setUser(u);
         if (u != null && a.isClosed() < 1) {
             s.saveOrUpdate(a);
-            Date d = new Date(a.getEndDate().getTime() + 14400000);
+            Date d = new Date(a.getEndDate().getTime());
             scheduler.schedule(new CloseAuctionTask(a, this), d);
         } else {
             throw new Exception("Invalid: User not in database or Auction is closed");
@@ -130,7 +130,7 @@ public class AuctionRepository {
         a.setBook(b);
         if (u != null && b != null && a.isClosed() < 1) {
             s.saveOrUpdate(a);
-            Date d = new Date(a.getEndDate().getTime() + 14400000);
+            Date d = new Date(a.getEndDate().getTime());
             scheduler.schedule(new CloseAuctionTask(a, this), d);
         } else {
             throw new Exception("Invalid: User or Book not in database or Auction is closed");

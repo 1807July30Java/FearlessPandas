@@ -130,7 +130,7 @@ public class Auction {
     public int isClosed() {
         Long a = (System.currentTimeMillis() - this.endDate.getTime());
         System.out.println("Auction is closed?" + a + " end date " + this.endDate.getTime());
-        if (a > 14400000) {
+        if (a > 0) {
             System.out.println("Auction Is Closed");
             return 1;
         } else {
@@ -142,7 +142,7 @@ public class Auction {
     public int getIsClosed() {
         Long a = (System.currentTimeMillis() - this.endDate.getTime());
         System.out.println("Auction is closed?" + a + " end date " + this.endDate.getTime());
-        if (a > 14400000) {
+        if (a > 0) {
             System.out.println("Auction Is Closed");
             return 1;
         } else {
@@ -152,7 +152,7 @@ public class Auction {
     }
 
     public void setClosed() {
-        if (this.endDate.getTime() + 14400000 < System.currentTimeMillis()) {
+        if (this.endDate.getTime()< System.currentTimeMillis()) {
             this.isclosed = 1;
         } else {
             this.isclosed = 0;
@@ -160,7 +160,7 @@ public class Auction {
     }
 
     public void setClosed(int isclosed) {
-        if (this.endDate.getTime() + 14400000 < System.currentTimeMillis()) {
+        if (this.endDate.getTime()< System.currentTimeMillis()) {
             this.isclosed = 1;
         } else {
             this.isclosed = 0;

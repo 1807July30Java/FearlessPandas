@@ -34,7 +34,7 @@ public class AuctionService {
     }
 
     public Auction saveAuctionWithBook(Auction a) throws Exception {
-        if (a.getEndDate().getTime() - a.getCreateDate().getTime() > 0) {
+        if (a.isClosed() < 1) {
             return auctionRepository.saveAuctionWithUserAndBookId(a);
         } else {
             throw new Exception("Ending date must be after start date");

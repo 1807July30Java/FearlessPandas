@@ -39,10 +39,11 @@ public class AuctionController {
 		int reqid;
 		try {
 			reqid = (int) req.getSession().getAttribute("id");
+			return new ResponseEntity<>(auctionService.getAuctionById(id,reqid),HttpStatus.OK);
 		}catch(Exception e) {
-			return null;
+			return new ResponseEntity<>(null,HttpStatus.OK);
 		}
-		return new ResponseEntity<>(auctionService.getAuctionById(id,reqid),HttpStatus.OK);
+		
 	}
 	@GetMapping("/all")
 	@ResponseBody

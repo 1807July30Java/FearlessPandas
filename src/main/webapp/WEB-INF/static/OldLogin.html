@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+
+<script rel = "text/javascript">
+function AjaxPost(url,body, func){
+	  var xhr = new XMLHttpRequest();
+	  xhr.onreadystatechange = function (){
+	    if(this.readyState==4 && this.status == 200){
+	      func(this);
+	    }
+	  }
+	  xhr.open("POST",url,true);
+	  xhr.setRequestHeader("Accept","application/json");
+	  xhr.setRequestHeader("Content-Type","application/json");
+	  xhr.send(body);
+	};
+	
+	function userLogin(){
+		var u  = document.getElementById("username");
+		var p = document.getElementById("password");
+		var credentials = {"username":u.value,"pass":p.value};
+		console.log(credentials);
+		AjaxPost("login",JSON.stringify(credentials),function(xhr){console.log(xhr.responseText);});
+	}
+</script>
+<title>Login</title>
+</head>
+<body>
+  <div class = "centerform">
+    <form id = "loginform" class = "displayDiv">
+		<fieldset>
+			<legend>Username:</legend>
+			<input id = "username" required name = "username" />
+		</fieldset>
+		<fieldset>
+			<legend>password:</legend>
+			<input id = "password" required type = "password" name = "password"/>
+		</fieldset>
+		<br>
+		<input type = "button" value = "login" onclick = "userLogin()"/>
+		</form>
+		<form id = "forgotpassword" action = "settings?op=loginhelp" method = "post">
+		<legend>Recovery Email:</legend>
+		<input required name = "email" pattern ="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"/>
+		<input type = "submit" value = "forgot password">
+		</form>
+	
+</div>
+
+</body>
+</html>

@@ -2,6 +2,7 @@ package com.revature.domain;
 
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -9,8 +10,11 @@ import java.sql.Date;
 @NamedQueries({
         @NamedQuery(name = "getAllAuctions", query = "from Auction"),
         @NamedQuery(name = "getAllAuctionsBefore", query = "from Auction where endDate < :end_date"),
-        @NamedQuery(name = "getUserAuctions", query = "from Auction where user.userId is :userId order by createDate desc")
+        @NamedQuery(name = "getUserAuctions", query = "from Auction where user.userId is :userId order by createDate desc"),
+        @NamedQuery(name = "getClosedAuctions", query = "from Auction where isclosed = 1"),
+        @NamedQuery(name = "setClosedAuctions", query = "update Auction set ISCLOSED =1 where auctionId = :auctionId")
 })
+@Component
 @Entity
 @Table(name = "AUCTION")
 public class Auction {
@@ -30,8 +34,8 @@ public class Auction {
     private double minimumPrice;
     @Column(name = "BUY_IT_NOW")
     private double buyItNow;
-    @Column(name = "ISCLOSED")
-    private boolean isClosed;
+    @Column(name = "ISCLOSED", columnDefinition = "Number(1,0) default 0")
+    private int isclosed;
     /*********************************************************************************/
     //Many to one User --> many Auction
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
@@ -112,20 +116,33 @@ public class Auction {
     }
 
     /*********************************************************************************/
-    public boolean isClosed() {
+    public int isClosed() {
         Long a = (System.currentTimeMillis() - this.endDate.getTime());
         System.out.println("Auction is closed?" + a + " end date " + this.endDate.getTime());
-        return a > 15000000 ;
+        if(a > 14400000) {
+        	System.out.println("Auction Is Closed");
+        	return 1  ;
+        }else {
+        	System.out.println("Auction Is Not Closed");
+        	return 0;
+        }
     }
 
-    public void setClosed(boolean isClosed) {
-        this.isClosed = this.endDate.getTime() < System.currentTimeMillis();
+    public void setClosed() { 	
+        if(this.endDate.getTime() + 14400000 < System.currentTimeMillis()) {
+        	this.isclosed =  1;
+        }else {
+        	this.isclosed =  0;
+        }
+    }
+    public void setClosed(int isclosed) {
+        this.isclosed = isclosed;
     }
 
     @Override
     public String toString() {
         return "Auction [auctionId=" + auctionId + ", book=" + book + ", createDate=" + createDate + ", endDate="
-                + endDate + ", minimumPrice=" + minimumPrice + ", buyItNow=" + buyItNow + ", user=" + user + ", bids=" + "]";
+                + endDate + ", minimumPrice=" + minimumPrice + ", buyItNow=" + buyItNow + ", user=" + user+ "]";
     }
 
 }

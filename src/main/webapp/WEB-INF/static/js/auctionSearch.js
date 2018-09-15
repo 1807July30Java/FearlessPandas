@@ -4,7 +4,7 @@ function sendAjaxPost(url, body, func) {
         if (this.readyState === 4 && this.status === 200) {
             func(this);
         }
-    }
+    };
         xhr.open("POST", url, true);
         xhr.setRequestHeader("Accept", "application/json");
         xhr.setRequestHeader("Content-Type", "application/json");
@@ -28,15 +28,15 @@ function makeModal(xhr) {
 	console.log("xhr modal call");
     var res = JSON.parse(xhr.responseText);
     console.log(res);
-    document.getElementById("title1").innerText = res.book.title;
-    document.getElementById("author1").innerText = res.book.author;
+    document.getElementById("title").innerText = res.book.title;
+    document.getElementById("author").innerText = res.book.author;
     document.getElementById("desc").innerText = res.book.description;
     document.getElementById("publisher").innerText = res.book.publisher;
-    document.getElementById("isbn1").innerText = res.book.isbn;
+    document.getElementById("isbn").innerText = res.book.isbn;
     document.getElementById("condition").innerText = res.book.condition.name;
     var genres = "";
     for (var i = 0; i < res.book.genres.length; i++) {
-        if (i != res.book.genres.length - 1) {
+        if (i !== res.book.genres.length - 1) {
             genres += res.book.genres[i].name + ", ";
         } else {
             genres += res.book.genres[i].name;
@@ -82,11 +82,11 @@ function populate(xhr) {
             publisher.innerText = book.publisher;
             var view = document.createElement("td");
             view.innerHTML = "<button class='btn btn-sm btn-primary btn-block text-uppercase' onclick='sendAjaxGet(\"auction/" + res[i].auctionId + "\", makeModal)' data-toggle='modal' data-target='#exampleModal'>View</button>";
-            var bid = document.createElement('a');
-            bid.setAttribute('class', 'btn btn-lg btn-primary');
-            bid.setAttribute('href', 'bid');
-            bid.innerText = "BID?";
-            row.append(sDate, eDate, price, bin, title, author, publisher, view,bid);
+            // var bid = document.createElement('a');
+            // bid.setAttribute('class', 'btn btn-lg btn-primary');
+            // bid.setAttribute('href', 'bid');
+            // bid.innerText = "BID?";
+            row.append(sDate, eDate, price, bin, title, author, publisher, view);
         }
     }
     
@@ -108,8 +108,8 @@ function search(){
 			"isbn": isbn,
 			"minimumPrice": min,
 			"buyNow": buyNow,
-			"endDate": endDate		
-	}
+			"endDate": endDate
+	};
 	
 		console.log(url);
 

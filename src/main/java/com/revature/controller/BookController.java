@@ -25,7 +25,11 @@ public class BookController {
 	private BookService bookService;
 	@GetMapping("/{bookId}")
 	public ResponseEntity<Book> getBookById(@PathVariable int bookId){
-		return new ResponseEntity<>(bookService.getBookById(bookId),HttpStatus.OK);
+		try {
+			return new ResponseEntity<>(bookService.getBookById(bookId),HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(bookService.getBookById(bookId),HttpStatus.OK);
+		}
 	}
 	@GetMapping("/info/{title}/{author}/{publisher}") 
 	public ResponseEntity<List<Book>> getBooksByInfo(@PathVariable String title,@PathVariable String author,@PathVariable String publisher){
@@ -39,8 +43,7 @@ public class BookController {
 		return new ResponseEntity<>(bookService.getAuctionSearch(isbn,title, author, publisher, minimumPrice, buyNow, endDate),HttpStatus.OK);
 	}
 	@PostMapping("/searching") 
-	public ResponseEntity<List<Auction>> getAuctionBooksByInfo(@RequestBody Search search){		
-		System.out.println("************************************************* "+ search);
+	public ResponseEntity<List<Auction>> getAuctionBooksByInfo(@RequestBody Search search){	
 		return new ResponseEntity<>(bookService.getAuctionSearch(search.getIsbn(),search.getTitle(), search.getAuthor(), search.getPublisher(), search.getMinimumPrice(), search.getBuyItNow(), search.getEndDate()),HttpStatus.OK);
 	}
 }

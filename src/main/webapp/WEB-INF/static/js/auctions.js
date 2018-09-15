@@ -15,11 +15,11 @@ function makeModal(xhr) {
     document.getElementById("author").innerText = res.book.author;
     document.getElementById("desc").innerText = res.book.description;
     document.getElementById("publisher").innerText = res.book.publisher;
-    document.getElementById("isbn1").innerText = res.book.isbn;
+    document.getElementById("isbn").innerText = res.book.isbn;
     document.getElementById("condition").innerText = res.book.condition.name;
     var genres = "";
     for (var i = 0; i < res.book.genres.length; i++) {
-        if (i != res.book.genres.length - 1) {
+        if (i !== res.book.genres.length - 1) {
             genres += res.book.genres[i].name + ", ";
         } else {
             genres += res.book.genres[i].name;

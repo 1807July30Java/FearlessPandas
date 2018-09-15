@@ -1,6 +1,13 @@
 package com.revature.domain;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 import javax.persistence.*;
+
+@NamedQueries({
+	@NamedQuery(name = "getBidsByAuctionId",query = "from Bid where auction.auctionId = :auctionId order by amount desc")
+})
 
 @Entity
 @Table(name = "BID")
@@ -12,15 +19,15 @@ public class Bid {
     @Column(name = "BID_ID")
     private int bidId;
     @Column(name = "AMOUNT")
-    private int amount;
+    private double amount;
     /*********************************************************************************/
     //Many to one AppUser --> many Auction
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
     private User user;
     /*********************************************************************************/
-    //Many to one AppUser --> many Auction
-    @ManyToOne(fetch = FetchType.LAZY)
+    //Many to one AppUser --> many Auctions
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "AUCTION_ID")
     private Auction auction;
 
@@ -33,7 +40,7 @@ public class Bid {
         this.bidId = bidId;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 

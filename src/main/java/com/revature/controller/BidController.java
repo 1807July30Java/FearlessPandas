@@ -6,10 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.revature.domain.Bid;
 import com.revature.domain.User;
@@ -23,23 +20,24 @@ public class BidController {
 	UserService userService;
 	@Autowired
 	BidService bidService;
+
 	@PostMapping("/new")
 	public ResponseEntity<String> newBid(HttpServletRequest req, @RequestBody Bid b) {
 		HttpSession session = req.getSession(false);
 		try {
-			if(session != null) {
+			if (session != null) {
 				int id = (int) session.getAttribute("id");
 				User u = userService.getUserById(req, id);
 				b.setUser(u);
 				bidService.addBidToAuction(b);
-				return new ResponseEntity<>("Placed new bid",HttpStatus.OK);
-			}else {
-				return new ResponseEntity<>("You are not signed in",HttpStatus.OK);
-			}	
-		}catch(Exception e) {
-			return new ResponseEntity<>("Bad Request",HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<>("Placed new bid", HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>("You are not signed in", HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<>("Bad Request", HttpStatus.BAD_REQUEST);
 		}
-		
+
 	}
 
 }

@@ -11,7 +11,10 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(name = "getBookById", query = "from Book where bookId = :bookId"),
         @NamedQuery(name = "getBookByInfo", query = "from Book where title = :title and author = :author and publisher = :publisher"),
-        @NamedQuery(name = "getBooksByGeneralInfo", query = "from Book where title = :title or author is :author or publisher = :publisher or isbn = :isbn"),
+        @NamedQuery(name = "getBooksByGeneralInfo", query = "from Book where title LIKE CONCAT('%',:title,'%')" +
+                " AND author LIKE CONCAT('%',:author,'%') " +
+                "AND publisher LIKE CONCAT('%',:publisher,'%')" +
+                "AND isbn LIKE CONCAT('%',:isbn,'%')"),
         @NamedQuery(name = "getBookByISBN", query = "from Book where isbn = :isbn")
 })
 
@@ -158,5 +161,17 @@ public class Book {
 		this.genres.add(g);
 	}
 
-
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookId=" + bookId +
+                ", isbn=" + isbn +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", description='" + description + '\'' +
+                ", condition=" + condition +
+                ", publisher='" + publisher + '\'' +
+                ", genres=" + genres +
+                '}';
+    }
 }

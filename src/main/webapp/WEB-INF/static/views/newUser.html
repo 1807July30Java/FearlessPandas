@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Register</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="style">
@@ -21,15 +21,23 @@
             xhr.send(body);
         }
 
-        function userLogin() {
-            var u = document.getElementById("inputUsername");
-            var p = document.getElementById("inputPassword");
-            var credentials = {"username": u.value, "pass": p.value};
-            console.log(credentials);
-            console.log(window.location.pathname);
-            AjaxPost("login", JSON.stringify(credentials), function (xhr) {
-
-                window.location.pathname = window.location.pathname.replace("/login", xhr.responseText);
+        function newUser() {
+            var fName = document.getElementById("fName").value;
+            var lName = document.getElementById("lName").value;
+            var Username = document.getElementById("username").value;
+            var Password = document.getElementById("password").value;
+            var Email = document.getElementById("email").value;
+            var PayEmail = document.getElementById("payEmail").value;
+            var newUser = {
+                "fName": fName,
+                "lName": lName,
+                "username": Username,
+                "pass": Password,
+                "email": Email,
+                "payEmail": PayEmail
+            };
+            AjaxPost("user/new", JSON.stringify(newUser), function (xhr) {
+                window.location.pathname = window.location.pathname.replace("/register", xhr.responseText);
             });
         }
     </script>
@@ -45,10 +53,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="login">Login
-                        <span class="sr-only">(current)</span>
-                    </a>
+                <li class="nav-item">
+                    <a class="nav-link" href="login">Login</a>
                 </li>
             </ul>
         </div>
@@ -63,21 +69,44 @@
                     <h5 class="card-title text-center">Sign In</h5>
                     <form class="form-signin" action="login" method="post" enctype="application/json">
                         <div class="form-label-group">
-                            <input type="text" id="inputUsername" class="form-control" placeholder="Username" required
-                                   autofocus name="username">
-                            <label for="inputUsername">Username</label>
+                            <input type="text" id="fName" class="form-control" placeholder="First Name" required
+                                   autofocus name="fName">
+                            <label for="fName">First Name</label>
                         </div>
 
                         <div class="form-label-group">
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Password"
+                            <input type="text" id="lName" class="form-control" placeholder="Last Name" required
+                                   autofocus name="lName">
+                            <label for="lName">Last Name</label>
+                        </div>
+
+                        <div class="form-label-group">
+                            <input type="text" id="username" class="form-control" placeholder="Username" required
+                                   autofocus name="username">
+                            <label for="username">Username</label>
+                        </div>
+
+                        <div class="form-label-group">
+                            <input type="password" id="password" class="form-control" placeholder="Password"
                                    required name="password">
-                            <label for="inputPassword">Password</label>
+                            <label for="password">Password</label>
+                        </div>
+
+                        <div class="form-label-group">
+                            <input type="email" id="email" class="form-control" placeholder="Email" required
+                                   autofocus name="email">
+                            <label for="email">Email</label>
+                        </div>
+
+                        <div class="form-label-group">
+                            <input type="email" id="payEmail" class="form-control" placeholder="Pay Email" required
+                                   autofocus name="email">
+                            <label for="payEmail">Pay Email</label>
                         </div>
                         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button"
-                                onclick="userLogin()">Sign in
+                                onclick="newUser()">Register
                         </button>
                         <hr class="my-4">
-                        <p class="text-center">Not A User? <a href="register">Register Here!</a></p>
                     </form>
                 </div>
             </div>
@@ -90,4 +119,5 @@
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"
         integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl"
         crossorigin="anonymous"></script>
+</html>
 </html>

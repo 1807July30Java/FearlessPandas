@@ -63,17 +63,18 @@ public class UserController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<String> addUser(@RequestBody User u) throws IOException {
+    public String addUser(HttpServletRequest req, @RequestBody User u) {
         try {
             if (userService.getUserByName(u.getUsername()) == null) {
                 userService.addUser(u);
-                return new ResponseEntity<>("Successfully created user", HttpStatus.OK);
+                req.getSession(true).setAttribute("id", u.getUserId());
+                return ("profile");
             } else {
-                return new ResponseEntity<>("this username already exists", HttpStatus.OK);
+                return ("register");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>("Failed to create user", HttpStatus.BAD_REQUEST);
+            return ("Failed to create user");
         }
     }
 

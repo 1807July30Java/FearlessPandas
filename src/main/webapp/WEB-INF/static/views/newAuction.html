@@ -132,7 +132,7 @@
                 "condition": {"name": condition.options[condition.selectedIndex].innerText}
             },
             "createDate": new Date().getTime(),
-            "endDate": enddate.valueAsNumber,
+            "endDate": new Date(enddate.value).getTime(),
             "user": {},
             "minimumPrice": minimumPrice.valueAsNumber,
             "buyItNow": buyItNow.valueAsNumber

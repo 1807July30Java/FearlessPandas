@@ -135,9 +135,14 @@ public class ResourceController {
         return null;
     }
 
+    @GetMapping("/register")
+    public String newUser() {
+        return "forward:/static/views/newUser.html";
+    }
+
     @GetMapping("/profileJS")
     public String getProfileJS() {
-        return "forward:static/js/profile.js";
+        return "forward:/static/js/profile.js";
     }
 
     @GetMapping("/auctionsJS")

@@ -1,5 +1,7 @@
 package com.revature.repository;
 
+import com.revature.beans.CloseAuctionTask;
+import com.revature.beans.CloseAuctionTaskExecutor;
 import com.revature.domain.Auction;
 import com.revature.domain.Book;
 import com.revature.domain.BookCondition;
@@ -10,6 +12,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.task.TaskExecutor;
+import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +31,10 @@ import java.util.HashSet;
 public class AuctionRepository {
 	@Autowired
 	SessionFactory sessionFactory;
+	@Autowired
+	TaskScheduler scheduler;
+	//@Autowired
+	//TaskExecutor execute = new TaskExecutor();
 	public Auction saveAuction(Auction a) {
 		Session s = sessionFactory.getCurrentSession();
         s.saveOrUpdate(a);
@@ -76,6 +84,7 @@ public class AuctionRepository {
 			a.setUser(u);
 			if(u!=null && !a.isClosed()) {
 				s.saveOrUpdate(a);
+				scheduler.schedule(new CloseAuctionTask(a),a.getEndDate());
 			}else {
 				throw new Exception("Invalid: User not in database or Auction is closed");
 			}
@@ -92,6 +101,7 @@ public class AuctionRepository {
 			a.setBook(b);
 			if(u!=null && b!= null && !a.isClosed()) {
 				s.saveOrUpdate(a);
+				scheduler.schedule(new CloseAuctionTask(a),a.getEndDate());
 			}else {
 				throw new Exception("Invalid: User or Book not in database or Auction is closed");
 			}

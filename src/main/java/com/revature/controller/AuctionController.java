@@ -20,6 +20,7 @@ import com.revature.service.AuctionService;
 import com.revature.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller("auctionController")
 @RequestMapping("/auction")
@@ -51,7 +52,8 @@ public class AuctionController {
 	
 	@PostMapping("/new")
 	@ResponseBody
-	public ResponseEntity<String> newAuction(HttpServletRequest req,@RequestBody Auction A){
+	public ResponseEntity<String> newAuction(HttpServletRequest req,HttpServletResponse res,@RequestBody Auction A){
+		
 		try {
 			int id = (int) req.getSession().getAttribute("id");
 			User u = userService.getUserById(req, id);
@@ -60,7 +62,7 @@ public class AuctionController {
 			return new ResponseEntity<>("Successfully created new Auction",HttpStatus.OK);
 		}catch(Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed to create new Auction", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("Failed to create new Auction",HttpStatus.BAD_REQUEST);
 		}
 	}
 	@PostMapping("/new/book")

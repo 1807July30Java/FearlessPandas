@@ -144,7 +144,14 @@ public class User {
     public void setUserrole(String userrole) {
         this.userrole = userrole;
     }
-
+    public void clearSensitiveData() {
+    	this.password = 0;
+    	this.email = "";
+    	this.payEmail = "";
+    	this.addresses = null;
+    	this.lName = "";
+    	this.fName = "";
+    }
     @Override
     public String toString() {
         return "User{" +

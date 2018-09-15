@@ -2,7 +2,9 @@ package com.revature.repository;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
+import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +37,11 @@ public class BidRepository {
 		//System.out.print(b);
 		//System.out.println(a);
 		return b;
+	}
+	public List<Bid> getBidsByAuction(Auction a){
+		Session s = sf.getCurrentSession();
+		Query q = s.getNamedQuery("getBidsByAuctionId");
+		q.setInteger("auctionId", a.getAuctionId());
+		return q.list();
 	}
 }

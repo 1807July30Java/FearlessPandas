@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationEvent;
 public class AuctionCloseEvent extends ApplicationEvent {
 
     private Auction auction;
-    private final boolean isClosed;
+    private final int isClosed;
     /**
      * Create a new ApplicationEvent.
      *
@@ -22,7 +22,7 @@ public class AuctionCloseEvent extends ApplicationEvent {
         return auction;
     }
 
-    public boolean isClosed() {
+    public int isClosed() {
         return isClosed;
     }
 }

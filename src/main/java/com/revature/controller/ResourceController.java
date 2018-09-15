@@ -1,6 +1,7 @@
 package com.revature.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -122,6 +123,16 @@ public class ResourceController {
             }
             return "forward:/static/views/login.html";
         }
+    }
+
+    @GetMapping("/")
+    public String redirectToLogin(HttpServletResponse res) {
+        try {
+            res.sendRedirect("login");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @GetMapping("/profileJS")

@@ -7,19 +7,19 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @NamedQueries({
-        @NamedQuery(name = "getAllAuctions", query = "from Auction"),
+        @NamedQuery(name = "getAllAuctions", query = "from Auction order by endDate desc"),
 
-        @NamedQuery(name = "getAllAuctionsBefore", query = "from Auction where endDate < :endDate"),
-        @NamedQuery(name = "getBookAuctionsBefore", query = "from Auction where endDate <= :endDate and book.bookId is :bookId"),
-       
+        @NamedQuery(name = "getAllAuctionsBefore", query = "from Auction where endDate < :endDate order by endDate desc"),
+        @NamedQuery(name = "getBookAuctionsBefore", query = "from Auction where endDate <= :endDate and book.bookId is :bookId order by endDate desc"),
 
-        @NamedQuery(name ="getAuctionByBookId", query = "from Auction where book.bookId = :bookId"),
-        @NamedQuery(name = "getAuctionByBookIdAndMinPrice", query = "from Auction where book.bookId = :bookId and minimumPrice = :minimumPrice"),
-        @NamedQuery(name = "getAuctionByBookIdAndBuyNowPrice", query = "from Auction where book.bookId = :bookId and buyItNow = :buyItNow"),
-        @NamedQuery(name = "getAuctionByBookIdBuyNowMinPrice", query = "from Auction where book.bookId = :bookId and buyItNow = :buyItNow and minimumPrice = :minimumPrice and endDate <= :endDate"),
-        @NamedQuery(name = "getAuctionByGeneralBook", query = "from Auction where book.bookId = :bookId "),
 
-        
+        @NamedQuery(name = "getAuctionByBookId", query = "from Auction where book.bookId = :bookId order by endDate desc"),
+        @NamedQuery(name = "getAuctionByBookIdAndMinPrice", query = "from Auction where book.bookId = :bookId and minimumPrice = :minimumPrice order by endDate desc"),
+        @NamedQuery(name = "getAuctionByBookIdAndBuyNowPrice", query = "from Auction where book.bookId = :bookId and buyItNow = :buyItNow order by endDate desc"),
+        @NamedQuery(name = "getAuctionByBookIdBuyNowMinPrice", query = "from Auction where book.bookId = :bookId and buyItNow = :buyItNow and minimumPrice = :minimumPrice and endDate <= :endDate order by endDate desc"),
+        @NamedQuery(name = "getAuctionByGeneralBook", query = "from Auction where book.bookId = :bookId  order by endDate desc"),
+
+
         @NamedQuery(name = "getUserAuctions", query = "from Auction where user.userId is :userId order by createDate desc")
 
 })

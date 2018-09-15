@@ -5,11 +5,10 @@ function sendAjaxPost(url, body, func) {
             func(this);
         }
     };
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader("Accept", "application/json");
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.send(body);
-    
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(body);
 }
 
 function sendAjaxGet(url, func) {
@@ -24,14 +23,35 @@ function sendAjaxGet(url, func) {
     xhr.send();
 }
 
+function setBid(xhr) {
+    var res = JSON.parse(xhr.responseText);
+    document.getElementById("currentBid").innerText = res.amount;
+}
+
+function makeBid() {
+    var amount = document.getElementById("bidBox").valueAsNumber;
+    var auctionId = document.getElementById("currentBid").className;
+
+    var newBid = {
+        "amount": amount,
+        "user": null,
+        "auction": {
+            "auctionId": auctionId
+        }
+    };
+    sendAjaxPost("bid/new", newBid, function (xhr) {
+        sendAjaxGet("auction/bid/" + auctionId, setBid);
+    });
+}
+
 function makeModal(xhr) {
-	console.log("xhr modal call");
+    console.log("xhr modal call");
     var res = JSON.parse(xhr.responseText);
     console.log(res);
-    document.getElementById("title").innerText = res.book.title;
-    document.getElementById("author").innerText = res.book.author;
+    document.getElementById("title1").innerText = res.book.title;
+    document.getElementById("author1").innerText = res.book.author;
     document.getElementById("desc").innerText = res.book.description;
-    document.getElementById("publisher").innerText = res.book.publisher;
+    document.getElementById("publisher1").innerText = res.book.publisher;
     document.getElementById("isbn").innerText = res.book.isbn;
     document.getElementById("condition").innerText = res.book.condition.name;
     var genres = "";
@@ -45,19 +65,22 @@ function makeModal(xhr) {
     document.getElementById("genre").innerText = genres;
     document.getElementById("seller").innerText = res.user.fName + " " + res.user.lName;
     if (res.minimumPrice === 0 && res.buyItNow === 0) {
-        document.getElementById("price").innerText = 0;
+        document.getElementById("price").innerText = "0";
     } else if (res.minimumPrice > 0) {
         document.getElementById("price").innerText = res.minimumPrice;
     } else {
         document.getElementById("price").innerText = res.buyItNow;
     }
+    sendAjaxGet("auction/bid/" + res.auctionId, setBid);
+    document.getElementById("cuurentBid").className = res.auctionId;
 }
 
 function populate(xhr) {
-    var res = JSON.parse(xhr.responseText);
-    console.log(res);
+    document.getElementById("searchResults").style.display = "block";
+    document.getElementById("auctionTable").innerHTML = "";
     if (xhr.responseText) {
-        var jsp = JSON.parse(xhr.responseText);
+        var res = JSON.parse(xhr.responseText);
+        console.log(res);
         var table = document.getElementById("auctionTable");
         for (var i = 0; i < res.length; i++) {
             var row = document.createElement("tr");
@@ -89,36 +112,31 @@ function populate(xhr) {
             row.append(sDate, eDate, price, bin, title, author, publisher, view);
         }
     }
-    
+
 }
 
 
-function search(){
-	var title = document.getElementById("title").value;
-	var author = document.getElementById("author").value;
-	var publisher = document.getElementById("publisher").value;
-	var isbn = document.getElementById("isbn").value;
-	var min = document.getElementById("minimum").value;
-	var buyNow = document.getElementById("buyNow").value;
-	var endDate = document.getElementById("endDate").value;
-	var url = {
-			"title": title,
-			"author": author,
-			"publisher": publisher,
-			"isbn": isbn,
-			"minimumPrice": min,
-			"buyNow": buyNow,
-			"endDate": endDate
-	};
-	
-		console.log(url);
+function search() {
+    var title = document.getElementById("title").value;
+    var author = document.getElementById("author").value;
+    var publisher = document.getElementById("publisher").value;
+    var min = document.getElementById("minimum").value;
+    var buyNow = document.getElementById("buyNow").value;
+    var url = {
+        "title": title,
+        "author": author,
+        "publisher": publisher,
+        "minimumPrice": min,
+        "buyNow": buyNow
+    };
 
-	  sendAjaxPost("book/searching", JSON.stringify(url), populate);
-	  console.log(url);
+    console.log(url);
+
+    sendAjaxPost("book/searching", JSON.stringify(url), populate);
+    console.log(url);
 }
-
 
 
 window.onload = function () {
-	document.getElementById("auctionTable").innerText="";
+    document.getElementById("auctionTable").innerText = "";
 };

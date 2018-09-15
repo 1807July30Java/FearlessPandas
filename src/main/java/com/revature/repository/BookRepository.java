@@ -44,10 +44,12 @@ public class BookRepository {
         Session s = sessionFactory.getCurrentSession();
         List<Auction> auction = new ArrayList<>();
         Query q = s.getNamedQuery("getBooksByGeneralInfo");
-        q.setString("title", '%' + title + '%');
-        q.setString("author", '%' + author + '%');
-        q.setString("publisher", '%' + publisher + '%');
-        q.setString("isbn", '%' + Integer.toString(isbn) + '%');
+        System.out.println(title + author + publisher + isbn);
+        q.setString("title", title);
+        q.setString("author", author);
+        q.setString("publisher", publisher);
+        q.setString("isbn", "");
+        System.out.println(q.list());
         List<Book> books = new ArrayList<>(q.list());
         System.out.println("-------------------------------------------------------------" + books.size());
 

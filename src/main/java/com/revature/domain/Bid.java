@@ -2,6 +2,10 @@ package com.revature.domain;
 
 import javax.persistence.*;
 
+@NamedQueries({
+	@NamedQuery(name = "getBidsByAuctionId",query = "from Bid where auction.auctionId = :auctionId order by amount desc")
+})
+
 @Entity
 @Table(name = "BID")
 public class Bid {

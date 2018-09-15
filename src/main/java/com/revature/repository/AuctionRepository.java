@@ -202,8 +202,6 @@ public class AuctionRepository {
 			q.setInteger("minimumPrice", minimumPrice);
 			return q.list();
 		}else {
-			
-
 			Query q = s.getNamedQuery("getAuctionByGeneralBook");
 			q.setInteger("bookId", bookId);
 			return q.list();

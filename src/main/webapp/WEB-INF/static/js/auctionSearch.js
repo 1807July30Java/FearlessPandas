@@ -28,11 +28,11 @@ function makeModal(xhr) {
 	console.log("xhr modal call");
     var res = JSON.parse(xhr.responseText);
     console.log(res);
-    document.getElementById("title").innerText = res.book.title;
-    document.getElementById("author").innerText = res.book.author;
+    document.getElementById("title1").innerText = res.book.title;
+    document.getElementById("author1").innerText = res.book.author;
     document.getElementById("desc").innerText = res.book.description;
     document.getElementById("publisher").innerText = res.book.publisher;
-    document.getElementById("isbn").innerText = res.book.isbn;
+    document.getElementById("isbn1").innerText = res.book.isbn;
     document.getElementById("condition").innerText = res.book.condition.name;
     var genres = "";
     for (var i = 0; i < res.book.genres.length; i++) {

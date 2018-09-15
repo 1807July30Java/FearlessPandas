@@ -11,8 +11,8 @@ function sendAjaxGet(url, func) {
 
 function makeModal(xhr) {
     var res = JSON.parse(xhr.responseText);
-    document.getElementById("title1").innerText = res.book.title;
-    document.getElementById("author1").innerText = res.book.author;
+    document.getElementById("title").innerText = res.book.title;
+    document.getElementById("author").innerText = res.book.author;
     document.getElementById("desc").innerText = res.book.description;
     document.getElementById("publisher").innerText = res.book.publisher;
     document.getElementById("isbn1").innerText = res.book.isbn;

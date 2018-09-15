@@ -50,6 +50,7 @@ public class BookRepository {
 		q.setString("publisher", publisher);
 		q.setInteger("isbn", isbn);
 		books.addAll(q.list());
+		System.out.println("-------------------------------------------------------------"+ books.size());
 		
 		for (Book book : books) {
 			System.out.println("************************************ "+ book.getBookId());

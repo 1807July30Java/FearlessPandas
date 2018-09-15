@@ -1,5 +1,6 @@
 package com.revature.repository;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,6 +13,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.revature.domain.Auction;
 import com.revature.domain.Book;
 
 
@@ -20,6 +22,9 @@ import com.revature.domain.Book;
 public class BookRepository {
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	@Autowired
+	private AuctionRepository auctionRepository;
 	
 	public Book getBookById(int bookId) {
 		Session s = sessionFactory.getCurrentSession();
@@ -34,6 +39,24 @@ public class BookRepository {
 		q.setString("author", author);
 		q.setString("publisher", publisher);
 		return q.list();
+	}
+	public List<Auction> getAuctionBooksByInfo(int isbn, String title, String author, String publisher, int minimumPrice, int buyItNow, Date endDate){
+		Session s = sessionFactory.getCurrentSession();
+		List<Auction> auction = new ArrayList<>();
+		List<Book> books = new ArrayList<>();
+		Query q = s.getNamedQuery("getBooksByGeneralInfo");
+		q.setString("title", title);
+		q.setString("author", author);
+		q.setString("publisher", publisher);
+		q.setInteger("isbn", isbn);
+		books.addAll(q.list());
+		
+		for (Book book : books) {
+			System.out.println("************************************ "+ book.getBookId());
+			auction.addAll(auctionRepository.getAuctionSearch(book.getBookId(), minimumPrice, buyItNow, endDate));
+		}
+		
+		return auction;
 	}
 	public List<Book> getBooksByArgs(List<String> args ){
 		Session s = sessionFactory.getCurrentSession();

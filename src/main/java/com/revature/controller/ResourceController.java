@@ -81,4 +81,17 @@ public class ResourceController {
     public String getUpdateJS() {
     	return "forward:/static/js/update.js";
     }
+    @GetMapping("/search")
+    public String getSearch(HttpServletRequest req) {
+    	HttpSession ses = req.getSession(false);
+    	if (ses != null) {
+    		return "forward:/static/views/search.html";
+		}
+    	return "forward:/static/views/login.html";
+    }
+    @GetMapping("/auctionSearchJS")
+    public String getAuctionSearch() {
+   
+    	return "forward:/static/js/auctionSearch.js";
+    }
 }

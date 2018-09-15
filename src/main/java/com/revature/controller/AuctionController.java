@@ -31,25 +31,53 @@ public class AuctionController {
 	UserService userService;
 	@GetMapping("/{id}")
 	@ResponseBody
-	public ResponseEntity<Auction> getAuctionById(@PathVariable int id){
-		return new ResponseEntity<>(auctionService.getAuctionById(id),HttpStatus.OK);
+	public ResponseEntity<Auction> getAuctionById(HttpServletRequest req,@PathVariable int id){
+		int reqid;
+		try {
+			reqid = (int) req.getSession().getAttribute("id");
+		}catch(Exception e) {
+			return null;
+		}
+		return new ResponseEntity<>(auctionService.getAuctionById(id,reqid),HttpStatus.OK);
 	}
 	@GetMapping("/all")
 	@ResponseBody
-	public ResponseEntity<List<Auction>> getAllAuctions(){
-		return new ResponseEntity<>(auctionService.getAllAuctions(),HttpStatus.OK);
+	public ResponseEntity<List<Auction>> getAllAuctions(HttpServletRequest req){
+		int id;
+		try {
+			id = (int) req.getSession().getAttribute("id");
+		}catch(Exception e) {
+			return null;
+		}
+		return new ResponseEntity<>(auctionService.getAllAuctions(id),HttpStatus.OK);
 	}
 	@GetMapping("/closed/{id}")
 	@ResponseBody
-	public ResponseEntity<Boolean> isClosed(@PathVariable int id){
+	public ResponseEntity<Integer> isClosed(@PathVariable int id){
 		return new ResponseEntity<>(auctionService.isClosed(id),HttpStatus.OK);
 	}
 	@GetMapping("/this")
 	@ResponseBody
 	public ResponseEntity<List<Auction>> getAllUserAuctions(HttpServletRequest req) {
-		return new ResponseEntity<>(auctionService.getAllUserAuctions((int)req.getSession(false).getAttribute("id")),HttpStatus.OK);
+		int id;
+		try {
+			id = (int) req.getSession().getAttribute("id");
+		}catch(Exception e) {
+			return null;
+		}
+		return new ResponseEntity<>(auctionService.getAllUserAuctions(id),HttpStatus.OK);
 	}
-	
+	@GetMapping("/closed")
+	@ResponseBody
+	public ResponseEntity<List<Auction>> getClosedAuctions(HttpServletRequest req){
+		int id;
+		try {
+			id = (int) req.getSession().getAttribute("id");
+		}catch(Exception e) {
+			return null;
+		}
+		return new ResponseEntity<>(auctionService.getClosedAuctions(id),HttpStatus.OK);
+	}
 	@PostMapping("/new")
 	@ResponseBody
 	public ResponseEntity<String> newAuction(HttpServletRequest req,HttpServletResponse res,@RequestBody Auction A){

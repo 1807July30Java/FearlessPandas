@@ -15,7 +15,20 @@ import java.util.List;
 public class AuctionService {
     @Autowired
     AuctionRepository auctionRepository;
-
+    public Auction processAuction(Auction a, int userid) {
+    	if(! (a.getUser().getUserId() == userid)) {
+    		a.getUser().clearSensitiveData();
+    	}
+    	return a;
+    }
+    public List<Auction> processAuctions(List<Auction> auctions, int userId){
+    	for(Auction a:auctions) {
+    		if(! (a.getUser().getUserId() == userId)) {
+        		a.getUser().clearSensitiveData();
+        	}
+    	}
+    	return auctions;
+    }
     public Auction saveAuction(Auction a) throws Exception {
         return auctionRepository.saveAuctionWithUserAndBook(a);
     }
@@ -28,24 +41,27 @@ public class AuctionService {
         }
     }
 
-    public Auction getAuctionById(int id) {
-        return auctionRepository.getAuctionById(id);
+    public Auction getAuctionById(int id,int userId) {
+        return processAuction(auctionRepository.getAuctionById(id),userId);
     }
 
-    public List<Auction> getAllAuctions() {
-        return auctionRepository.getAllAuctions();
+    public List<Auction> getAllAuctions(int userId) {
+        return processAuctions(auctionRepository.getAllAuctions(),userId);
     }
 
-    public List<Auction> getAllAuctionsBefore(Date d) {
-        return auctionRepository.getAllAuctionsBefore(d);
+    public List<Auction> getAllAuctionsBefore(Date d,int userId) {
+        return processAuctions(auctionRepository.getAllAuctionsBefore(d), userId);
     }
 
     public List<Auction> getAllUserAuctions(int id) {
         return auctionRepository.getAllUserAuctions(id);
     }
 
-    public boolean isClosed(int id) {
+    public int isClosed(int id) {
         Auction a = auctionRepository.getAuctionById(id);
         return auctionRepository.isClosed(a);
+    }
+    public List<Auction> getClosedAuctions(int userId){
+    	return processAuctions(auctionRepository.getClosed(),userId);
     }
 }

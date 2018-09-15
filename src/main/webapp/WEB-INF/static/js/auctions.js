@@ -50,7 +50,7 @@ function populateAuctions(xhr) {
             sDate.innerText = temp.toLocaleString();
             var eDate = document.createElement("td");
             temp = new Date(res[i].endDate);
-            eDate.innerText = temp.toLocaleString();
+            eDate.innerText = temp.toUTCString();
             var price = document.createElement("td");
             price.innerText = res[i].minimumPrice;
             var bin = document.createElement("td");

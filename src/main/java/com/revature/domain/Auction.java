@@ -21,7 +21,6 @@ import java.sql.Date;
         @NamedQuery(name = "getAuctionByGeneralBook", query = "from Auction where book.bookId = :bookId  order by endDate desc"),
 
 
-
         @NamedQuery(name = "getUserAuctions", query = "from Auction where user.userId is :userId order by createDate desc")
 
 
@@ -131,44 +130,47 @@ public class Auction {
     public int isClosed() {
         Long a = (System.currentTimeMillis() - this.endDate.getTime());
         System.out.println("Auction is closed?" + a + " end date " + this.endDate.getTime());
-        if(a > 14400000) {
-        	System.out.println("Auction Is Closed");
-        	return 1  ;
-        }else {
-        	System.out.println("Auction Is Not Closed");
-        	return 0;
+        if (a > 14400000) {
+            System.out.println("Auction Is Closed");
+            return 1;
+        } else {
+            System.out.println("Auction Is Not Closed");
+            return 0;
         }
     }
+
     public int getIsClosed() {
         Long a = (System.currentTimeMillis() - this.endDate.getTime());
         System.out.println("Auction is closed?" + a + " end date " + this.endDate.getTime());
-        if(a > 14400000) {
-        	System.out.println("Auction Is Closed");
-        	return 1  ;
-        }else {
-        	System.out.println("Auction Is Not Closed");
-        	return 0;
+        if (a > 14400000) {
+            System.out.println("Auction Is Closed");
+            return 1;
+        } else {
+            System.out.println("Auction Is Not Closed");
+            return 0;
         }
     }
-    public void setClosed() { 	
-        if(this.endDate.getTime() + 14400000 < System.currentTimeMillis()) {
-        	this.isclosed =  1;
-        }else {
-        	this.isclosed =  0;
+
+    public void setClosed() {
+        if (this.endDate.getTime() + 14400000 < System.currentTimeMillis()) {
+            this.isclosed = 1;
+        } else {
+            this.isclosed = 0;
         }
     }
+
     public void setClosed(int isclosed) {
-    	if(this.endDate.getTime() + 14400000 < System.currentTimeMillis()) {
-        	this.isclosed =  1;
-        }else {
-        	this.isclosed =  0;
+        if (this.endDate.getTime() + 14400000 < System.currentTimeMillis()) {
+            this.isclosed = 1;
+        } else {
+            this.isclosed = 0;
         }
     }
 
     @Override
     public String toString() {
         return "Auction [auctionId=" + auctionId + ", book=" + book + ", createDate=" + createDate + ", endDate="
-                + endDate + ", minimumPrice=" + minimumPrice + ", buyItNow=" + buyItNow + ", user=" + user+ "]";
+                + endDate + ", minimumPrice=" + minimumPrice + ", buyItNow=" + buyItNow + ", user=" + user + "]";
     }
 
 }

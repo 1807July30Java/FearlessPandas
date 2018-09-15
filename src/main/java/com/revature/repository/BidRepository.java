@@ -28,7 +28,7 @@ public class BidRepository {
 	    a = (Auction) s.get(Auction.class, a.getAuctionId());
 	    Date d = new Date(System.currentTimeMillis());
 	    
-		if(a != null && a.getEndDate().getTime() > d.getTime()) {
+		if(a != null && a.isClosed()<1) {
 			b.setAuction(a);
 			s.saveOrUpdate(b);
 		}else {

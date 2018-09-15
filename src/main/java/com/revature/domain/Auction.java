@@ -9,10 +9,22 @@ import java.sql.Date;
 
 @NamedQueries({
         @NamedQuery(name = "getAllAuctions", query = "from Auction"),
-        @NamedQuery(name = "getAllAuctionsBefore", query = "from Auction where endDate < :end_date"),
-        @NamedQuery(name = "getUserAuctions", query = "from Auction where user.userId is :userId order by createDate desc"),
-        @NamedQuery(name = "getClosedAuctions", query = "from Auction where isclosed = 1"),
-        @NamedQuery(name = "setClosedAuctions", query = "update Auction set ISCLOSED =1 where auctionId = :auctionId")
+
+
+        @NamedQuery(name = "getAllAuctionsBefore", query = "from Auction where endDate < :endDate"),
+        @NamedQuery(name = "getBookAuctionsBefore", query = "from Auction where endDate <= :endDate and book.bookId is :bookId"),
+       
+        @NamedQuery(name ="getAuctionByBookId", query = "from Auction where book.bookId is :bookId"),
+        @NamedQuery(name = "getAuctionByBookIdAndMinPrice", query = "from Auction where book.bookId is :bookId and minimumPrice is :minimumPrice"),
+        @NamedQuery(name = "getAuctionByBookIdAndBuyNowPrice", query = "from Auction where book.bookId is :bookId and buyItNow is :buyItNow"),
+        @NamedQuery(name = "getAuctionByBookIdBuyNowMinPrice", query = "from Auction where book.bookId is :bookId and buyItNow is :buyItNow and minimumPrice is :minimumPrice and endDate <= :endDate"),
+        @NamedQuery(name = "getAuctionByGeneralBook", query = "from Auction where book.bookId is :bookId or buyItNow is :buyItNow or minimumPrice is :minimumPrice or endDate <= :endDate")
+        
+
+       
+        @NamedQuery(name = "getUserAuctions", query = "from Auction where user.userId is :userId order by createDate desc")
+
+
 })
 @Component
 @Entity

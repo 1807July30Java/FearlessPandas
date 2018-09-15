@@ -11,7 +11,7 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(name = "getBookById", query = "from Book where bookId = :bookId"),
         @NamedQuery(name = "getBookByInfo", query = "from Book where title = :title and author = :author and publisher = :publisher"),
-        @NamedQuery(name = "getBooksByGeneralInfo", query = "from Book where title = :title or author = :author or publisher = :publisher"),
+        @NamedQuery(name = "getBooksByGeneralInfo", query = "from Book where title = :title or author = :author or publisher = :publisher or isbn is :isbn"),
         @NamedQuery(name = "getBookByISBN", query = "from Book where isbn = :isbn")
 })
 

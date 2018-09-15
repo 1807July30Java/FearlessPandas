@@ -59,7 +59,11 @@ public class AuctionController {
 	@GetMapping("/closed/{id}")
 	@ResponseBody
 	public ResponseEntity<Integer> isClosed(@PathVariable int id){
-		return new ResponseEntity<>(auctionService.isClosed(id),HttpStatus.OK);
+		try {
+			return new ResponseEntity<>(auctionService.isClosed(id),HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(null,HttpStatus.OK);
+		}
 	}
 	@GetMapping("/this")
 	@ResponseBody
@@ -85,8 +89,12 @@ public class AuctionController {
 	}
 	@GetMapping("/bids/{auctionid}")
 	public ResponseEntity<List<Bid>> getBidsByAuction(HttpServletRequest req,@PathVariable int auctionid){
-		Auction a = auctionService.getAuctionById(auctionid, (int)req.getSession(false).getAttribute("id"));
-		return new ResponseEntity<>(bidService.getBidsByAuction(a),HttpStatus.OK);
+		try {
+			Auction a = auctionService.getAuctionById(auctionid, (int)req.getSession(false).getAttribute("id"));
+			return new ResponseEntity<>(bidService.getBidsByAuction(a),HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(null,HttpStatus.OK);
+		}
 	}
 	@PostMapping("/new")
 	@ResponseBody

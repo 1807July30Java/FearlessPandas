@@ -12,14 +12,14 @@ import java.sql.Date;
         @NamedQuery(name = "getAllAuctionsBefore", query = "from Auction where endDate < :endDate"),
         @NamedQuery(name = "getBookAuctionsBefore", query = "from Auction where endDate <= :endDate and book.bookId is :bookId"),
        
+
         @NamedQuery(name ="getAuctionByBookId", query = "from Auction where book.bookId = :bookId"),
         @NamedQuery(name = "getAuctionByBookIdAndMinPrice", query = "from Auction where book.bookId = :bookId and minimumPrice = :minimumPrice"),
         @NamedQuery(name = "getAuctionByBookIdAndBuyNowPrice", query = "from Auction where book.bookId = :bookId and buyItNow = :buyItNow"),
         @NamedQuery(name = "getAuctionByBookIdBuyNowMinPrice", query = "from Auction where book.bookId = :bookId and buyItNow = :buyItNow and minimumPrice = :minimumPrice and endDate <= :endDate"),
         @NamedQuery(name = "getAuctionByGeneralBook", query = "from Auction where book.bookId = :bookId "),
-        
 
-       
+        
         @NamedQuery(name = "getUserAuctions", query = "from Auction where user.userId is :userId order by createDate desc")
 
 })

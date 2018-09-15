@@ -25,23 +25,29 @@ function sendAjaxGet(url, func) {
 
 function setBid(xhr) {
     var res = JSON.parse(xhr.responseText);
-    document.getElementById("currentBid").innerText = res.amount;
+    document.getElementById("currentBid").innerText = "Current Bid: " + res[0].amount;
+    document.getElementById("bidBox").value = parseInt(res[0].amount) + 1;
 }
 
 function makeBid() {
     var amount = document.getElementById("bidBox").valueAsNumber;
     var auctionId = document.getElementById("currentBid").className;
+    var minAmount = document.getElementById("currentBid").innerText;
 
-    var newBid = {
-        "amount": amount,
-        "user": null,
-        "auction": {
-            "auctionId": auctionId
-        }
-    };
-    sendAjaxPost("bid/new", newBid, function (xhr) {
-        sendAjaxGet("auction/bid/" + auctionId, setBid);
-    });
+    minAmount = parseInt(minAmount.replace("Current Bid: ",""));
+
+    if(amount > minAmount) {
+        var newBid = {
+            "amount": amount,
+            "user": {},
+            "auction": {
+                "auctionId": auctionId
+            }
+        };
+        sendAjaxPost("bid/new", JSON.stringify(newBid), function (xhr) {
+            sendAjaxGet("auction/bids/" + auctionId, setBid);
+        });
+    }
 }
 
 function makeModal(xhr) {
@@ -71,8 +77,8 @@ function makeModal(xhr) {
     } else {
         document.getElementById("price").innerText = res.buyItNow;
     }
-    sendAjaxGet("auction/bid/" + res.auctionId, setBid);
-    document.getElementById("cuurentBid").className = res.auctionId;
+    sendAjaxGet("auction/bids/" + res.auctionId, setBid);
+    document.getElementById("currentBid").className = res.auctionId;
 }
 
 function populate(xhr) {
